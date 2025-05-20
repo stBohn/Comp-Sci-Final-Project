@@ -11,12 +11,17 @@ import java.awt.*;
             welcomeLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
             welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
             
-            ImageIcon icon = new ImageIcon("path/to/your/button.png");
+            ImageIcon icon = new ImageIcon("C:\\Users\\Steve\\CompSciFinalProject\\ImageAssets\\Button.jpg");
             
-            JButton playButton = new JButton("Play");
+            JButton playButton = new JButton(icon);
             playButton.setFont(new Font("SansSerif", Font.PLAIN, 16));
             playButton.addActionListener(e -> cardLayout.show(mainPanel, "Game"));
-
+            
+            //playButton.setBorderPainted(false);
+            playButton.setContentAreaFilled(false);
+            playButton.setFocusPainted(false);
+            playButton.setOpaque(false);
+            
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(10, 10, 10, 10);
             gbc.gridx = 0;
