@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=GamePanel
+comment1.params=
+comment1.target=GamePanel()
+comment2.params=
+comment2.target=void\ setUpTimer()
+comment3.params=
+comment3.target=void\ resetGame()
+numComments=4
