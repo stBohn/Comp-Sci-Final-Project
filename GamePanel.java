@@ -77,6 +77,10 @@ public class GamePanel
     public void Upgrades(JPanel panel){
         for (int i = 1; i <= 50; i++) {
             JButton button = new JButton("Button " + i);
+            Dimension size = new Dimension(292, 60);
+            button.setPreferredSize(size);
+            button.setMaximumSize(size);
+            button.setMinimumSize(size); //for some reason all three of these are needed, no idea why
             panel.add(button);
         }
     }
