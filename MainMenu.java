@@ -9,7 +9,7 @@ public class MainMenu
     public MainMenu()
     {
         JFrame frame = new JFrame();
-        frame.setTitle("Clicking Game");
+        frame.setTitle("Main Menu");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.PINK);

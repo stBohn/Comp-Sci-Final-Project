@@ -10,7 +10,7 @@ public class GamePanel
     public GamePanel()
     {
         JFrame frame = new JFrame();
-        frame.setTitle("Clicking Game");
+        frame.setTitle("Cookie Click Game");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.PINK);
