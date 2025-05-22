@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-public class Tester
+public class Runner
 {
    public static void main(String[] args)
    {
-        SwingUtilities.invokeLater(ClickingGameApp::new);
+        SwingUtilities.invokeLater(MainMenu::new);
    }
 }

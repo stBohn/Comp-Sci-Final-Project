@@ -1,87 +1,37 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 
-public class GamePanel extends JPanel
+public class GamePanel
 {
-    private int timeLeft = 10;
-    private int score = 0;
-    private JLabel timeLabel;
-    private JLabel scoreLabel, message;
-    private JButton clickButton;
-    private Timer timer;
-    private JButton replayButton;
-
     public GamePanel()
     {
-        setLayout(new BorderLayout());
-        // Top: Timer label
-        timeLabel = new JLabel("Time left: 10", SwingConstants.CENTER);
-        timeLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        add(timeLabel, BorderLayout.NORTH);
-        // Center: Optional welcome image or drawing
-        message = new JLabel("Click the button below!");
-        message.setHorizontalAlignment(SwingConstants.CENTER);
-        add(message, BorderLayout.CENTER);
-        // Bottom: Button + Score + Replay
-        JPanel bottomPanel = new JPanel();
-        clickButton = new JButton("Click me!");
-        clickButton.setFocusPainted(false);
-        clickButton.addActionListener(e ->
-                {
-                    if (timeLeft > 0) {
-                        score++;
-                        scoreLabel.setText("Score: " + score);
-                    }
-            });
-
-        scoreLabel = new JLabel("Score: 0");
-
-        replayButton = new JButton("Replay");
-        replayButton.setFocusPainted(false);
-        replayButton.addActionListener(e -> resetGame());
-
-        bottomPanel.add(clickButton);
-        bottomPanel.add(scoreLabel);
-        bottomPanel.add(replayButton);
-
-        add(bottomPanel, BorderLayout.SOUTH);
-
-        setUpTimer();
-    }
-
-    public void setUpTimer()
-    {
-        timer = new Timer(1000, e ->
-                {
-                    timeLeft--;
-                    timeLabel.setText("Time left: " + timeLeft);
-                    if (timeLeft <= 0) {
-                        ((Timer) e.getSource()).stop();
-                        clickButton.setEnabled(false);
-                        if(score > 30)
-                        {
-                            message.setForeground(Color.GREEN);
-                            message.setText("Time's up! Final score: " + score);
-                        }
-                        else
-                        {
-                            message.setForeground(Color.RED);
-                            message.setText("Time's up! Final score: " + score);
-                        }
-                    }
-            });
-        timer.start();
-    }
-
-    public void resetGame()
-    {
-        timeLeft = 10;
-        score = 0;
-        timeLabel.setText("Time left: 10");
-        scoreLabel.setText("Score: 0");
-        clickButton.setEnabled(true);
-        message.setIcon(null);
-        message.setText("Welcome to the CLICKING GAME");
-        timer.restart();
+        JFrame frame = new JFrame();
+        frame.setTitle("Clicking Game");
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setBackground(Color.PINK);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        ImageIcon backgroundIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Background.png");
+        JLabel background = new JLabel(backgroundIcon);
+        
+        ImageIcon MainGameIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\MainGame.png");
+        JLabel MainGame = new JLabel(MainGameIcon);
+        
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(null);
+        contentPanel.add(MainGame);
+        contentPanel.add(background);
+        
+        frame.add(contentPanel);
+        
+        background.setBounds(0,0,800,600);
+        MainGame.setBounds(0,0,800,600);
+        
+        frame.setVisible(true);
     }
 }
