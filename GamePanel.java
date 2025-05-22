@@ -30,12 +30,19 @@ public class GamePanel
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
+        buttonPanel.setBackground(Color.RED);
+        Upgrades(buttonPanel);
+        JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
         
         JButton cookie = new JButton(cookieIcon);
         cookie.setContentAreaFilled(false);
         cookie.setBorderPainted(false);
         cookie.setFocusPainted(false);
+        ImageIcon rollover = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\RollOverCookie.png");
+        cookie.setRolloverIcon(rollover);
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
         //stuff for making the button animated when clicked
@@ -51,12 +58,13 @@ public class GamePanel
             buttonAnimation(cookie);
         });
         
-        
+        scrollPane.setBounds(473,82,310,480);
         CookieCount.setBounds(75,35,550,300);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
         
+        contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);
         contentPanel.add(cookie);
         contentPanel.add(MainGame);
@@ -65,6 +73,12 @@ public class GamePanel
         frame.add(contentPanel);
         
         frame.setVisible(true);
+    }
+    public void Upgrades(JPanel panel){
+        for (int i = 1; i <= 50; i++) {
+            JButton button = new JButton("Button " + i);
+            panel.add(button);
+        }
     }
     public void buttonAnimation(JButton cookie){
         int[] i = {0};
