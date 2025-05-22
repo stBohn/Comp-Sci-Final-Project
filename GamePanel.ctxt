@@ -2,8 +2,8 @@
 comment0.target=GamePanel
 comment1.params=
 comment1.target=GamePanel()
-comment2.params=panel
-comment2.target=void\ Upgrades(javax.swing.JPanel)
+comment2.params=panel\ cookieCount\ CookieCount\ multCount
+comment2.target=void\ Upgrades(javax.swing.JPanel,\ int[],\ javax.swing.JLabel,\ javax.swing.JLabel)
 comment3.params=cookie
 comment3.target=void\ buttonAnimation(javax.swing.JButton)
 comment4.params=e

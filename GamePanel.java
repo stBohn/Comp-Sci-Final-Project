@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 public class GamePanel
 {
+    private int ClickMult = 1;
     public GamePanel()
     {
         JFrame frame = new JFrame();
@@ -30,10 +31,14 @@ public class GamePanel
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
+        JLabel multCount = new JLabel("Mult: "+ClickMult);
+        multCount.setFont(new Font("Arial", Font.PLAIN, 40));
+        multCount.setForeground(Color.WHITE);
+        
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
         buttonPanel.setBackground(Color.RED);
-        Upgrades(buttonPanel);
+        Upgrades(buttonPanel,cookieCount,CookieCount,multCount);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
         
@@ -52,7 +57,7 @@ public class GamePanel
         int animationSteps = 5;
         int delay = 20; //in miliseconds
         cookie.addActionListener(e -> {
-            cookieCount[0]++;
+            cookieCount[0]+= (1*ClickMult);
             CookieCount.setText("Cookie Count: "+cookieCount[0]);
             
             buttonAnimation(cookie);
@@ -60,12 +65,14 @@ public class GamePanel
         
         scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(75,35,550,300);
+        multCount.setBounds(10,-65,300,200);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
         
         contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);
+        contentPanel.add(multCount);
         contentPanel.add(cookie);
         contentPanel.add(MainGame);
         contentPanel.add(background);
@@ -74,13 +81,24 @@ public class GamePanel
         
         frame.setVisible(true);
     }
-    public void Upgrades(JPanel panel){
+    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount){
         for (int i = 1; i <= 50; i++) {
             JButton button = new JButton("Button " + i);
             Dimension size = new Dimension(292, 60);
             button.setPreferredSize(size);
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed, no idea why
+            //this is gonna get ugly:
+            if(i == 1){
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=50){
+                        cookieCount[0]-=50; //cost
+                        CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
+                        ClickMult+=1;
+                        multCount.setText("Mult: "+ClickMult);
+                    }  
+                });
+            }
             panel.add(button);
         }
     }
