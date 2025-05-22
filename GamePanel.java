@@ -67,6 +67,41 @@ public class GamePanel
         frame.setVisible(true);
     }
     public void buttonAnimation(JButton cookie){
-        
+        int[] i = {0};
+        int[] sizes = {300,300};
+        Timer[] timer = new Timer[1];
+        timer[0] = new Timer(10,new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(i[0]>=3){
+                    timer[0].stop();
+                    buttonSmallerAnimation(cookie);
+                }
+                sizes[0]+=5; 
+                sizes[1]+=5;
+                cookie.setSize(sizes[0],sizes[1]);
+                
+                i[0]++;
+            }
+        });
+        timer[0].start();
+    }
+    public void buttonSmallerAnimation(JButton cookie){
+        int[] i = {0};
+        int[] sizes = {315,315};
+        Timer[] timer = new Timer[1];
+        timer[0] = new Timer(10,new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(i[0]>=3){
+                    timer[0].stop();
+                    
+                }
+                sizes[0]-=5; 
+                sizes[1]-=5;
+                cookie.setSize(sizes[0],sizes[1]);
+                
+                i[0]++;
+            }
+        });
+        timer[0].start();
     }
 }
