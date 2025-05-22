@@ -58,7 +58,7 @@ public class GamePanel
             buttonAnimation(cookie);
         });
         
-        scrollPane.setBounds(473,82,310,480);
+        scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(75,35,550,300);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
