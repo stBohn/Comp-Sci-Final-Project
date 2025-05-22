@@ -15,6 +15,7 @@ public class MainMenu
         frame.setBackground(Color.PINK);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setAlwaysOnTop(true);
         
         ImageIcon backgroundIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Background.png");
         JLabel background = new JLabel(backgroundIcon);
@@ -29,9 +30,7 @@ public class MainMenu
         contentPanel.setLayout(null);
         contentPanel.setBackground(Color.PINK);
         
-        contentPanel.add(title);
-        contentPanel.add(cookie);
-        contentPanel.add(background);
+        
         
         background.setBounds(0,0,800,600);
         cookie.setBounds(75,200,300,300);
@@ -46,14 +45,21 @@ public class MainMenu
                 frame.dispose(); // Close the old frame
             });
         });
+        playButton.setFocusPainted(false);
         contentPanel.add(playButton);
         
         JButton helpButton = new JButton("HELP");
         helpButton.setBounds(400,400,300,75);
+        helpButton.setFocusPainted(false);
         contentPanel.add(helpButton);
+        
+        contentPanel.add(title);
+        contentPanel.add(cookie);
+        contentPanel.add(background);
         
         frame.add(contentPanel);
         
         frame.setVisible(true);
+        frame.setAlwaysOnTop(false);
     }
 }
