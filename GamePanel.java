@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GamePanel
 {
-    private int ClickMult = 1;
+    private int AutoClickers = 0;
     public GamePanel()
     {
         JFrame frame = new JFrame();
@@ -32,14 +32,14 @@ public class GamePanel
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
-        JLabel multCount = new JLabel("Mult: "+ClickMult);
-        multCount.setFont(new Font("Arial", Font.PLAIN, 40));
+        JLabel multCount = new JLabel("AutoClickers: "+AutoClickers);
+        multCount.setFont(new Font("Arial", Font.PLAIN, 30));
         multCount.setForeground(Color.WHITE);
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
         buttonPanel.setBackground(Color.RED);
-        ArrayList<JButton> buttonList = new ArrayList<>();
+        ArrayList<UpgradeButton> buttonList = new ArrayList<>();
         Upgrades(buttonPanel,cookieCount,CookieCount,multCount,buttonList);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
@@ -58,12 +58,12 @@ public class GamePanel
         int animationSteps = 5;
         int delay = 20; //in miliseconds
         cookie.addActionListener(e -> {
-            cookieCount[0]+= (1*ClickMult);
+            cookieCount[0]+= (1);
             CookieCount.setText("Cookie Count: "+cookieCount[0]);
             
-             for (JButton b : buttonList) {
-                    if ((int) b.getClientProperty("price")<=cookieCount[0]) {
-                           b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UgradeButton.png"));
+             for (UpgradeButton b : buttonList) {
+                    if (b.getPrice()<=cookieCount[0]) {
+                           b.notShaded();
                     }
             }
             
@@ -88,11 +88,11 @@ public class GamePanel
         
         frame.setVisible(true);
     }
-    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount, ArrayList<JButton> buttonList){
+    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
         for (i[0]=1; i[0] <= 50; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png");
-            JButton button = new JButton(upgradeButtonIcon);
+            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UgradeButton.png"), 16);
             button.setContentAreaFilled(false);
             button.setBorderPainted(false);
             button.setFocusPainted(false);
@@ -101,20 +101,21 @@ public class GamePanel
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
             if(i[0]==1){
-                button.putClientProperty("price", 11);
+                button.setPrice(15);
+                button.setNotShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClicker.png"));
+                button.setShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClickerShaded.png"));
+                button.shaded();
+                
+                
+                button.setForeground(Color.RED);
                 button.addActionListener(e -> {
-                    if(cookieCount[0]>=(int)button.getClientProperty("price")){
+                    if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=(int)button.getClientProperty("price");
-                            
-                            //upgrade specific stuff:
                             CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
-                            ClickMult+=1;
-                            
-                            multCount.setText("Mult: "+ClickMult);
                     }
-                     for (JButton b : buttonList) {
+                     for (UpgradeButton b : buttonList) {
                         if ((int) b.getClientProperty("price")>=cookieCount[0]) {
-                            b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png"));
+                            b.shaded();
                         }
                     }
                 });
@@ -122,13 +123,13 @@ public class GamePanel
             else{
                 button.putClientProperty("price", 12);
                 button.addActionListener(e -> {
-                    if(cookieCount[0]>=(int)button.getClientProperty("price")){
+                    if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=(int)button.getClientProperty("price");
                             CookieCount.setText("Cookie Count: "+cookieCount[0]); 
                     }
-                     for (JButton b : buttonList) {
-                        if ((int) b.getClientProperty("price")>=cookieCount[0]) {
-                            b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png"));
+                     for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
                         }
                     }
                 });
@@ -142,37 +143,14 @@ public class GamePanel
     }
     public void buttonAnimation(JButton cookie){
         int[] i = {0};
-        int[] sizes = {300,300};
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(10,new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(i[0]>=3){
                     timer[0].stop();
-                    buttonSmallerAnimation(cookie);
                 }
-                sizes[0]+=5; 
-                sizes[1]+=5;
-                cookie.setSize(sizes[0],sizes[1]);
-                
-                i[0]++;
-            }
-        });
-        timer[0].start();
-    }
-    public void buttonSmallerAnimation(JButton cookie){
-        int[] i = {0};
-        int[] sizes = {315,315};
-        Timer[] timer = new Timer[1];
-        timer[0] = new Timer(10,new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(i[0]>=3){
-                    timer[0].stop();
-                    
-                }
-                sizes[0]-=5; 
-                sizes[1]-=5;
-                cookie.setSize(sizes[0],sizes[1]);
-                
+                ImageIcon clickedIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
+                cookie.setIcon(clickedIcon);
                 i[0]++;
             }
         });

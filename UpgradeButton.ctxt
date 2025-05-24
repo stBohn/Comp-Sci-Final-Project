@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=UpgradeButton
+comment1.params=shadedIcon\ notShadedIcon\ price
+comment1.target=UpgradeButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon,\ int)
+comment2.params=shadedIcon
+comment2.target=void\ setShadedIcon(javax.swing.ImageIcon)
+comment3.params=notShadedIcon
+comment3.target=void\ setNotShadedIcon(javax.swing.ImageIcon)
+comment4.params=price
+comment4.target=void\ setPrice(int)
+comment5.params=
+comment5.target=int\ getPrice()
+comment6.params=
+comment6.target=boolean\ isIconShaded()
+comment7.params=
+comment7.target=void\ shaded()
+comment8.params=
+comment8.target=void\ notShaded()
+comment9.params=g
+comment9.target=void\ paintComponent(java.awt.Graphics)
+numComments=10
