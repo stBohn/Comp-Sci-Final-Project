@@ -23,8 +23,9 @@ public class UpgradeButton extends JButton {
     }
     public void setPrice(int price){
         this.price = price;
+        repaint();
     }
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
     public boolean isIconShaded(){
@@ -37,9 +38,11 @@ public class UpgradeButton extends JButton {
     public void notShaded(){
         setIcon(notShadedIcon);
         isShaded = false;
+        repaint();
     }
     public void purchase(){
         numberPurchased++;
+        price = (int)(price*(1.15*numberPurchased));
     }
     public int getNumberPurchased(){
         return numberPurchased;
@@ -53,6 +56,6 @@ public class UpgradeButton extends JButton {
             g.setColor(Color.GREEN);
         }
         g.setFont(new Font("Arial", Font.BOLD, 14));
-        g.drawString(""+price, 80, 45); // x=30, y=40
+        g.drawString(""+(int)price, 80, 45);
     }
 }

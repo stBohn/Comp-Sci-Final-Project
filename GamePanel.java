@@ -7,6 +7,13 @@ import java.util.ArrayList;
 
 public class GamePanel
 {
+    double[] cookieCount = {0};
+    int millions = 0;
+    int billions = 0;
+    int trillions = 0;
+    int quadrillions = 0;
+    int cachedAutoClicks = 0;
+    int cps = 0;
     public GamePanel()
     {
         JFrame frame = new JFrame();
@@ -17,8 +24,6 @@ public class GamePanel
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        int[] cookieCount = {0};
-        
         ImageIcon backgroundIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Background.png");
         JLabel background = new JLabel(backgroundIcon);
         
@@ -27,7 +32,7 @@ public class GamePanel
         
         ImageIcon cookieIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
         
-        JLabel CookieCount = new JLabel("Cookie Count: "+cookieCount[0]);
+        JLabel CookieCount = new JLabel("Cookie Count: "+(int)cookieCount[0]);
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
@@ -54,7 +59,7 @@ public class GamePanel
         int delay = 20; //in miliseconds
         cookie.addActionListener(e -> {
             cookieCount[0]+= (1);
-            CookieCount.setText("Cookie Count: "+cookieCount[0]);
+            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
             
              for (UpgradeButton b : buttonList) {
                     if (b.getPrice()<=cookieCount[0]) {
@@ -80,8 +85,9 @@ public class GamePanel
         frame.add(contentPanel);
         
         frame.setVisible(true);
+        gameLoop(CookieCount, buttonList);
     }
-    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
+    public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
         for (i[0]=1; i[0] <= 50; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png");
@@ -105,7 +111,9 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps++;
+                            
                     }
                      for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
@@ -115,11 +123,10 @@ public class GamePanel
                 });
             }
             else{
-                button.putClientProperty("price", 12);
                 button.addActionListener(e -> {
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
-                            CookieCount.setText("Cookie Count: "+cookieCount[0]); 
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]); 
                     }
                      for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
@@ -148,6 +155,28 @@ public class GamePanel
                 i[0]++;
             }
         });
+        timer[0].start();
+    }
+    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
+        //20fps
+        Timer[] timer = new Timer[1];
+        int[] millisecondsPassed = {0};
+        timer[0] = new Timer(50, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(millisecondsPassed[0]==1000){
+                    cookieCount[0]+=cps;
+                    millisecondsPassed[0] = 0;
+                }
+                millisecondsPassed[0]+=50;
+                CookieCount.setText("Cookie Count: "+(int)cookieCount[0]); 
+                 for (UpgradeButton b : buttonList) {
+                    if (b.getPrice()<=cookieCount[0]) {
+                           b.notShaded();
+                    }
+                }
+            }
+        });
+        
         timer[0].start();
     }
 }
