@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 public class GamePanel
 {
-    double[] cookieCount = {0};
+    double[] cookieCount = {130000};
     int millions = 0;
     int billions = 0;
     int trillions = 0;
     int quadrillions = 0;
     int cachedAutoClicks = 0;
     int cps = 0;
+    String filePath = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\";
     public GamePanel()
     {
         JFrame frame = new JFrame();
@@ -24,13 +25,13 @@ public class GamePanel
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        ImageIcon backgroundIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Background.png");
+        ImageIcon backgroundIcon = new ImageIcon(filePath+"Background.png");
         JLabel background = new JLabel(backgroundIcon);
         
-        ImageIcon MainGameIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\MainGame.png");
+        ImageIcon MainGameIcon = new ImageIcon(filePath+"MainGame.png");
         JLabel MainGame = new JLabel(MainGameIcon);
         
-        ImageIcon cookieIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
+        ImageIcon cookieIcon = new ImageIcon(filePath+"Cookie.png");
         
         JLabel CookieCount = new JLabel("Cookie Count: "+(int)cookieCount[0]);
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
@@ -51,7 +52,7 @@ public class GamePanel
         cookie.setContentAreaFilled(false);
         cookie.setBorderPainted(false);
         cookie.setFocusPainted(false);
-        ImageIcon rollover = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\RollOverCookie.png");
+        ImageIcon rollover = new ImageIcon(filePath+"RollOverCookie.png");
         cookie.setRolloverIcon(rollover);
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
@@ -96,8 +97,8 @@ public class GamePanel
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
         for (i[0]=1; i[0] <= 50; i[0]++) {
-            ImageIcon upgradeButtonIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png");
-            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UgradeButton.png"), 16);
+            ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
+            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
             button.setContentAreaFilled(false);
             button.setBorderPainted(false);
             button.setFocusPainted(false);
@@ -107,10 +108,10 @@ public class GamePanel
             button.setMinimumSize(size); //for some reason all three of these are needed
             if(i[0]==1){
                 button.setPrice(15);
-                button.setNotShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClicker.png"));
-                button.setShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClickerShaded.png"));
+                button.setNotShadedIcon(new ImageIcon(filePath+"AutoClicker.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"AutoClickerShaded.png"));
                 button.shaded();
-                button.setRolloverIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClickerRollover.png"));
+                button.setRolloverIcon(new ImageIcon(filePath+"AutoClickerRollover.png"));
                 
                 button.setForeground(Color.RED);
                 button.addActionListener(e -> {
@@ -119,11 +120,157 @@ public class GamePanel
                             button.purchase();
                             CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
                             cps++;
-                            
-                    }
-                     for (UpgradeButton b : buttonList) {
+                            for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
+                        }
+                     }
+                    }
+                });
+            }
+            else if(i[0]==2){
+                button.setPrice(100);
+                button.setNotShadedIcon(new ImageIcon(filePath+"ThumbsUpGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"ThumbsUpGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"ThumbsUpGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=10;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==3){
+                button.setPrice(1100);
+                button.setNotShadedIcon(new ImageIcon(filePath+"CoolGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"CoolGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"CoolGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=50;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==4){
+                button.setPrice(12000);
+                button.setNotShadedIcon(new ImageIcon(filePath+"StrongGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"StrongGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"StrongGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=1000;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==5){
+                button.setPrice(50000);
+                button.setNotShadedIcon(new ImageIcon(filePath+"SpookedGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"SpookedGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"SpookedGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=8000;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==6){
+                button.setPrice(100000);
+                button.setNotShadedIcon(new ImageIcon(filePath+"JumpscareGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"JumpscareGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"JumpscareGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=50000;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==7){
+                button.setPrice(130000);
+                button.setNotShadedIcon(new ImageIcon(filePath+"GrandpaGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"GrandpaGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"GrandpaGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=100000;
+                             for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                        }
+                    }
+                });
+            }
+            else if(i[0]==8){
+                button.setPrice(1000000);
+                button.setNotShadedIcon(new ImageIcon(filePath+"PartyGran.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"PartyGranShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"PartyGranRollover.png"));
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            CookieCount.setText("Cookie Count: "+(int)cookieCount[0]);
+                            cps+=1000000;
+                             for (UpgradeButton b : buttonList) {
+                            if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                            }
                         }
                     }
                 });

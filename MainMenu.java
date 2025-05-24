@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class MainMenu
 {
+    String filePath = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\";
     public MainMenu()
     {
         JFrame frame = new JFrame();
@@ -19,20 +20,20 @@ public class MainMenu
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setAlwaysOnTop(true);
         
-        ImageIcon backgroundIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Background.png");
+        ImageIcon backgroundIcon = new ImageIcon(filePath+"Background.png");
         JLabel background = new JLabel(backgroundIcon);
         
-        ImageIcon cookieIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
+        ImageIcon cookieIcon = new ImageIcon(filePath+"Cookie.png");
         JLabel cookieLabel = new JLabel(cookieIcon);
         
-        ImageIcon titleIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie Click  Game.png");
+        ImageIcon titleIcon = new ImageIcon(filePath+"Cookie Click  Game.png");
         JLabel title = new JLabel(titleIcon);
         
-        ImageIcon playIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayButton.png");
-        ImageIcon playIconRollOver = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayRollOver.png");
+        ImageIcon playIcon = new ImageIcon(filePath+"PlayButton.png");
+        ImageIcon playIconRollOver = new ImageIcon(filePath+"PlayRollOver.png");
         
-        ImageIcon helpIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\HelpButton.png");
-        ImageIcon helpIconRollOver = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\HelpRollOver.png");
+        ImageIcon helpIcon = new ImageIcon(filePath+"HelpButton.png");
+        ImageIcon helpIconRollOver = new ImageIcon(filePath+"HelpRollOver.png");
         
         
         JPanel contentPanel = new JPanel();
