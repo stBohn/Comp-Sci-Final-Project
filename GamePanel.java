@@ -36,6 +36,10 @@ public class GamePanel
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
+        JLabel cpsCount = new JLabel("per second: "+cps);
+        cpsCount.setFont(new Font("Arial", Font.PLAIN, 30));
+        cpsCount.setForeground(Color.WHITE);
+        
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
         buttonPanel.setBackground(Color.RED);
@@ -70,12 +74,14 @@ public class GamePanel
             buttonAnimation(cookie);
         });
         
+        cpsCount.setBounds(480,60,300,100);
         scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(75,35,550,300);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
         
+        contentPanel.add(cpsCount);
         contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);
         contentPanel.add(cookie);
@@ -85,7 +91,7 @@ public class GamePanel
         frame.add(contentPanel);
         
         frame.setVisible(true);
-        gameLoop(CookieCount, buttonList);
+        gameLoop(CookieCount, buttonList, cpsCount);
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
@@ -157,7 +163,7 @@ public class GamePanel
         });
         timer[0].start();
     }
-    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
+    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList, JLabel cpsCount){
         //20fps
         Timer[] timer = new Timer[1];
         int[] millisecondsPassed = {0};
@@ -174,6 +180,7 @@ public class GamePanel
                            b.notShaded();
                     }
                 }
+                cpsCount.setText("per second: "+cps);
             }
         });
         
