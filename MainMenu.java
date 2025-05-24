@@ -29,6 +29,10 @@ public class MainMenu
         ImageIcon playIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayButton.png");
         ImageIcon playIconRollOver = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayRollOver.png");
         
+        ImageIcon helpIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\HelpButton.png");
+        ImageIcon helpIconRollOver = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\HelpRollOver.png");
+        
+        
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
         contentPanel.setBackground(Color.PINK);
@@ -55,11 +59,12 @@ public class MainMenu
         playButton.setFocusPainted(false);
         contentPanel.add(playButton);
         
-        JButton helpButton = new JButton(playIcon);
+        JButton helpButton = new JButton(helpIcon);
+        helpButton.setRolloverIcon(helpIconRollOver);
         helpButton.setContentAreaFilled(false);
         helpButton.setBorderPainted(false);
         helpButton.setFocusPainted(false);
-        helpButton.setBounds(400,400,300,75);
+        helpButton.setBounds(400,400,340,114);
         helpButton.setFocusPainted(false);
         contentPanel.add(helpButton);
         

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 public class GamePanel
 {
@@ -38,9 +39,9 @@ public class GamePanel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
         buttonPanel.setBackground(Color.RED);
-        Upgrades(buttonPanel,cookieCount,CookieCount,multCount);
+        ArrayList<JButton> buttonList = new ArrayList<>();
+        Upgrades(buttonPanel,cookieCount,CookieCount,multCount,buttonList);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
-        
         
         JButton cookie = new JButton(cookieIcon);
         cookie.setContentAreaFilled(false);
@@ -59,6 +60,12 @@ public class GamePanel
         cookie.addActionListener(e -> {
             cookieCount[0]+= (1*ClickMult);
             CookieCount.setText("Cookie Count: "+cookieCount[0]);
+            
+             for (JButton b : buttonList) {
+                    if ((int) b.getClientProperty("price")<=cookieCount[0]) {
+                           b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UgradeButton.png"));
+                    }
+            }
             
             buttonAnimation(cookie);
         });
@@ -81,26 +88,57 @@ public class GamePanel
         
         frame.setVisible(true);
     }
-    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount){
-        for (int i = 1; i <= 50; i++) {
-            JButton button = new JButton("Button " + i);
+    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount, ArrayList<JButton> buttonList){
+        int[] i = {0};
+        for (i[0]=1; i[0] <= 50; i[0]++) {
+            ImageIcon upgradeButtonIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png");
+            JButton button = new JButton(upgradeButtonIcon);
+            button.setContentAreaFilled(false);
+            button.setBorderPainted(false);
+            button.setFocusPainted(false);
             Dimension size = new Dimension(292, 60);
             button.setPreferredSize(size);
             button.setMaximumSize(size);
-            button.setMinimumSize(size); //for some reason all three of these are needed, no idea why
-            //this is gonna get ugly:
-            if(i == 1){
+            button.setMinimumSize(size); //for some reason all three of these are needed
+            if(i[0]==1){
+                button.putClientProperty("price", 11);
                 button.addActionListener(e -> {
-                    if(cookieCount[0]>=50){
-                        cookieCount[0]-=50; //cost
-                        CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
-                        ClickMult+=1;
-                        multCount.setText("Mult: "+ClickMult);
-                    }  
+                    if(cookieCount[0]>=(int)button.getClientProperty("price")){
+                            cookieCount[0]-=(int)button.getClientProperty("price");
+                            
+                            //upgrade specific stuff:
+                            CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
+                            ClickMult+=1;
+                            
+                            multCount.setText("Mult: "+ClickMult);
+                    }
+                     for (JButton b : buttonList) {
+                        if ((int) b.getClientProperty("price")>=cookieCount[0]) {
+                            b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png"));
+                        }
+                    }
                 });
             }
-            panel.add(button);
+            else{
+                button.putClientProperty("price", 12);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=(int)button.getClientProperty("price")){
+                            cookieCount[0]-=(int)button.getClientProperty("price");
+                            CookieCount.setText("Cookie Count: "+cookieCount[0]); 
+                    }
+                     for (JButton b : buttonList) {
+                        if ((int) b.getClientProperty("price")>=cookieCount[0]) {
+                            b.setIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png"));
+                        }
+                    }
+                });
+            }
+            buttonList.add(button);
         }
+        for(JButton j : buttonList){
+            panel.add(j);
+        }
+        
     }
     public void buttonAnimation(JButton cookie){
         int[] i = {0};
