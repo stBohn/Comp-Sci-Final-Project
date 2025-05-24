@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+
 
 public class MainMenu
 {
@@ -21,7 +23,7 @@ public class MainMenu
         JLabel background = new JLabel(backgroundIcon);
         
         ImageIcon cookieIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
-        JLabel cookie = new JLabel(cookieIcon);
+        JLabel cookieLabel = new JLabel(cookieIcon);
         
         ImageIcon titleIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie Click  Game.png");
         JLabel title = new JLabel(titleIcon);
@@ -40,7 +42,7 @@ public class MainMenu
         
         
         background.setBounds(0,0,800,600);
-        cookie.setBounds(75,200,300,300);
+        cookieLabel.setBounds(75,200,300,300);
         title.setBounds(200,30,553,256);
         
         JButton playButton = new JButton(playIcon);
@@ -52,8 +54,9 @@ public class MainMenu
         int i = 0;
         playButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-                new GamePanel(); // Open the new frame
-                frame.dispose(); // Close the old frame
+                
+                new GamePanel();
+                frame.dispose();
             });
         });
         playButton.setFocusPainted(false);
@@ -69,12 +72,35 @@ public class MainMenu
         contentPanel.add(helpButton);
         
         contentPanel.add(title);
-        contentPanel.add(cookie);
+        contentPanel.add(cookieLabel);
         contentPanel.add(background);
         
         frame.add(contentPanel);
         
         frame.setVisible(true);
         frame.setAlwaysOnTop(false);
+        
+        spinCookieAnimation(cookieLabel);
     }
+    public void spinCookieAnimation(JLabel cookieLabel) {
+    int[] i = {0};
+    Timer[] timer = new Timer[1];
+
+    timer[0] = new Timer(10, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (i[0] >= 360) {
+                i[0]=0;
+            }
+            
+            String frameNumber = String.format("%03d", i[0]);
+            String path = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Main Menu Animations\\Cookie Spin\\frame_" + frameNumber + ".png";
+            cookieLabel.setIcon(new ImageIcon(path));
+
+            i[0]++;
+        }
+    });
+
+    timer[0].start();
+}
+
 }
