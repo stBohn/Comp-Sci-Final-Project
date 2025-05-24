@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GamePanel
 {
-    double[] cookieCount = {130000};
+    double[] cookieCount = {0};
     int millions = 0;
     int billions = 0;
     int trillions = 0;
@@ -77,7 +77,7 @@ public class GamePanel
         
         cpsCount.setBounds(480,60,300,100);
         scrollPane.setBounds(473,205,310,357);
-        CookieCount.setBounds(75,35,550,300);
+        CookieCount.setBounds(65,35,550,300);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
@@ -96,7 +96,7 @@ public class GamePanel
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
-        for (i[0]=1; i[0] <= 50; i[0]++) {
+        for (i[0]=1; i[0] <= 8; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
             UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
             button.setContentAreaFilled(false);
