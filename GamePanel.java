@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class GamePanel
 {
-    private int AutoClickers = 0;
     public GamePanel()
     {
         JFrame frame = new JFrame();
@@ -32,15 +31,11 @@ public class GamePanel
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
         
-        JLabel multCount = new JLabel("AutoClickers: "+AutoClickers);
-        multCount.setFont(new Font("Arial", Font.PLAIN, 30));
-        multCount.setForeground(Color.WHITE);
-        
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); //courtesy of Mr.GPT
         buttonPanel.setBackground(Color.RED);
         ArrayList<UpgradeButton> buttonList = new ArrayList<>();
-        Upgrades(buttonPanel,cookieCount,CookieCount,multCount,buttonList);
+        Upgrades(buttonPanel,cookieCount,CookieCount,buttonList);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
         JButton cookie = new JButton(cookieIcon);
@@ -72,14 +67,12 @@ public class GamePanel
         
         scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(75,35,550,300);
-        multCount.setBounds(10,-65,300,200);
         cookie.setBounds(80,250,300,300);
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
         
         contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);
-        contentPanel.add(multCount);
         contentPanel.add(cookie);
         contentPanel.add(MainGame);
         contentPanel.add(background);
@@ -88,7 +81,7 @@ public class GamePanel
         
         frame.setVisible(true);
     }
-    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, JLabel multCount, ArrayList<UpgradeButton> buttonList){
+    public void Upgrades(JPanel panel,int[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
         for (i[0]=1; i[0] <= 50; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\UpgradeButtonShaded.png");
@@ -105,16 +98,17 @@ public class GamePanel
                 button.setNotShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClicker.png"));
                 button.setShadedIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClickerShaded.png"));
                 button.shaded();
-                
+                button.setRolloverIcon(new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\AutoClickerRollover.png"));
                 
                 button.setForeground(Color.RED);
                 button.addActionListener(e -> {
                     if(cookieCount[0]>=button.getPrice()){
-                            cookieCount[0]-=(int)button.getClientProperty("price");
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
                             CookieCount.setText("Cookie Count: "+cookieCount[0]); //update cost
                     }
                      for (UpgradeButton b : buttonList) {
-                        if ((int) b.getClientProperty("price")>=cookieCount[0]) {
+                        if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                     }
@@ -124,7 +118,7 @@ public class GamePanel
                 button.putClientProperty("price", 12);
                 button.addActionListener(e -> {
                     if(cookieCount[0]>=button.getPrice()){
-                            cookieCount[0]-=(int)button.getClientProperty("price");
+                            cookieCount[0]-=button.getPrice();
                             CookieCount.setText("Cookie Count: "+cookieCount[0]); 
                     }
                      for (UpgradeButton b : buttonList) {

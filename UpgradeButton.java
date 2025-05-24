@@ -7,6 +7,7 @@ public class UpgradeButton extends JButton {
     ImageIcon notShadedIcon;
     boolean isShaded;
     int price;
+    int numberPurchased = 0;
     public UpgradeButton(ImageIcon shadedIcon, ImageIcon notShadedIcon, int price) {
         this.shadedIcon = shadedIcon;
         this.notShadedIcon = notShadedIcon;
@@ -36,6 +37,12 @@ public class UpgradeButton extends JButton {
     public void notShaded(){
         setIcon(notShadedIcon);
         isShaded = false;
+    }
+    public void purchase(){
+        numberPurchased++;
+    }
+    public int getNumberPurchased(){
+        return numberPurchased;
     }
     @Override
     protected void paintComponent(Graphics g) {
