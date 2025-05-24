@@ -26,6 +26,9 @@ public class MainMenu
         ImageIcon titleIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie Click  Game.png");
         JLabel title = new JLabel(titleIcon);
         
+        ImageIcon playIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayButton.png");
+        ImageIcon playIconRollOver = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\PlayRollOver.png");
+        
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
         contentPanel.setBackground(Color.PINK);
@@ -36,8 +39,12 @@ public class MainMenu
         cookie.setBounds(75,200,300,300);
         title.setBounds(200,30,553,256);
         
-        JButton playButton = new JButton("PLAY");
-        playButton.setBounds(400,300,300,75);
+        JButton playButton = new JButton(playIcon);
+        playButton.setRolloverIcon(playIconRollOver);
+        playButton.setContentAreaFilled(false);
+        playButton.setBorderPainted(false);
+        playButton.setFocusPainted(false);
+        playButton.setBounds(400,300,340,114);
         int i = 0;
         playButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
@@ -48,7 +55,10 @@ public class MainMenu
         playButton.setFocusPainted(false);
         contentPanel.add(playButton);
         
-        JButton helpButton = new JButton("HELP");
+        JButton helpButton = new JButton(playIcon);
+        helpButton.setContentAreaFilled(false);
+        helpButton.setBorderPainted(false);
+        helpButton.setFocusPainted(false);
         helpButton.setBounds(400,400,300,75);
         helpButton.setFocusPainted(false);
         contentPanel.add(helpButton);
