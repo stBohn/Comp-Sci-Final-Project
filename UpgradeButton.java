@@ -6,7 +6,7 @@ public class UpgradeButton extends JButton {
     ImageIcon shadedIcon;
     ImageIcon notShadedIcon;
     boolean isShaded;
-    int price;
+    double price;
     int numberPurchased = 0;
     public UpgradeButton(ImageIcon shadedIcon, ImageIcon notShadedIcon, int price) {
         this.shadedIcon = shadedIcon;
@@ -42,7 +42,7 @@ public class UpgradeButton extends JButton {
     }
     public void purchase(){
         numberPurchased++;
-        price = (int)(price*(1.15*numberPurchased));
+        price = (price*(1.15));
     }
     public int getNumberPurchased(){
         return numberPurchased;

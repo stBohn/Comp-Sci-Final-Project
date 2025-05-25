@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class GamePanel
 {
@@ -13,7 +14,7 @@ public class GamePanel
     int trillions = 0;
     int quadrillions = 0;
     int cachedAutoClicks = 0;
-    int cps = 0;
+    double cps = 0;
     String filePath = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\";
     public GamePanel()
     {
@@ -36,8 +37,9 @@ public class GamePanel
         JLabel CookieCount = new JLabel("Cookies: "+String.format("%.1f", cookieCount[0]));
         CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
         CookieCount.setForeground(Color.WHITE);
-        
-        JLabel cpsCount = new JLabel("per second: "+cps);
+        DecimalFormat df = new DecimalFormat("#.###");
+        JLabel cpsCount = new JLabel();
+        cpsCount.setText("per second: "+df.format(cps));
         cpsCount.setFont(new Font("Arial", Font.PLAIN, 30));
         cpsCount.setForeground(Color.WHITE);
         
@@ -186,7 +188,10 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            cps++;
+                            if(button.numberPurchased==1)
+                                cps+=0.1;
+                            else
+                                cps+=0.04;
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -433,7 +438,8 @@ public class GamePanel
                            b.notShaded();
                     }
                 }
-                cpsCount.setText("per second: "+cps);
+                DecimalFormat df = new DecimalFormat("#.###");
+                cpsCount.setText("per second: "+df.format(cps));
             }
         });
         
