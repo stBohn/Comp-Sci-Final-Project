@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,9 +17,12 @@ public class GamePanel
     int quadrillions = 0;
     int cachedAutoClicks = 0;
     double cps = 0;
-    String filePath = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\";
+    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\";
+    String filePath = fileLocation+"ImageAssets\\";
     public GamePanel()
     {
+        String data = LoadGame.loadFromFile("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\Save Data\\Save.txt");
+        cookieCount[0] = Double.parseDouble(data);
         JFrame frame = new JFrame();
         frame.setTitle("Cookie Click Game");
         frame.setSize(800, 600);
@@ -428,9 +433,14 @@ public class GamePanel
     }
     public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList, JLabel cpsCount){
         //20fps
+        int[] saveTimer = {0};
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(saveTimer[0]>=1000){
+                    SaveGame.saveToFile("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\Save Data\\Save.txt", ""+cookieCount[0]);
+                    saveTimer[0]=0;
+                }
                 cookieCount[0]+=((double)cps/20);
                 CookieCount.setText("Cookies: "+String.format("%.1f", cookieCount[0])); 
                  for (UpgradeButton b : buttonList) {
@@ -440,6 +450,7 @@ public class GamePanel
                 }
                 DecimalFormat df = new DecimalFormat("#.###");
                 cpsCount.setText("per second: "+df.format(cps));
+                saveTimer[0]+=50;
             }
         });
         

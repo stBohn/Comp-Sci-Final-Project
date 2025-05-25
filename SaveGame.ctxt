@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=SaveGame
+comment1.params=path\ data
+comment1.target=void\ saveToFile(java.lang.String,\ java.lang.String)
+numComments=2
