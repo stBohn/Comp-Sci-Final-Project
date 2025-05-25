@@ -52,17 +52,26 @@ public class GamePanel
         JPanel selectorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         selectorPanel.setOpaque(false);
         buttonPanel.setBackground(Color.RED);
+        
         SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"));
         Dimension size = new Dimension(163, 50);
         grandmasSelect.setPreferredSize(size);
+        grandmasSelect.setRolloverIcon(new ImageIcon(filePath+"GrandmasSelectRollover.png"));
         grandmasSelect.setMaximumSize(size);
         grandmasSelect.setMinimumSize(size);
+        grandmasSelect.setContentAreaFilled(false);
+        grandmasSelect.setBorderPainted(false);
+        grandmasSelect.setFocusPainted(false);
         grandmasSelect.notShaded();
         
         SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"));
         upgradesSelect.setPreferredSize(size);
+        upgradesSelect.setRolloverIcon(new ImageIcon(filePath+"UpgradesSelectRollover.png"));
         upgradesSelect.setMaximumSize(size);
         upgradesSelect.setMinimumSize(size);
+        upgradesSelect.setContentAreaFilled(false);
+        upgradesSelect.setBorderPainted(false);
+        upgradesSelect.setFocusPainted(false);
         upgradesSelect.shaded();
         
         boolean[] currentlyGrandma = {true};
@@ -75,12 +84,14 @@ public class GamePanel
                         grandmasSelect.shaded();
                         upgradesSelect.notShaded();
                         currentlyGrandma[0] = false;
+                        scrollPane.hide();
                     }
                 } else if (source == grandmasSelect) {
                     if(!currentlyGrandma[0]){
                         grandmasSelect.notShaded();
                         upgradesSelect.shaded();
                         currentlyGrandma[0] = true;
+                        scrollPane.show();
                     }
                 }
             }
