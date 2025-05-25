@@ -52,13 +52,13 @@ public class GamePanel
         JPanel selectorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         selectorPanel.setOpaque(false);
         buttonPanel.setBackground(Color.RED);
-        SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"));
+        SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"), true);
         Dimension size = new Dimension(163, 50);
         grandmasSelect.setPreferredSize(size);
         grandmasSelect.setMaximumSize(size);
         grandmasSelect.setMinimumSize(size);
         selectorPanel.add(grandmasSelect);
-        SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"));
+        SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"), false);
         upgradesSelect.setPreferredSize(size);
         upgradesSelect.setMaximumSize(size);
         upgradesSelect.setMinimumSize(size);

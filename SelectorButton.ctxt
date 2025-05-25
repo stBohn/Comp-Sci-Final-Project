@@ -1,11 +1,13 @@
 #BlueJ class context
 comment0.target=SelectorButton
-comment1.params=shadedIcon\ notShadedIcon
-comment1.target=SelectorButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon)
+comment1.params=shadedIcon\ notShadedIcon\ isGrandma
+comment1.target=SelectorButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon,\ boolean)
 comment2.params=
-comment2.target=boolean\ isIconShaded()
+comment2.target=void\ oneOfTheButtonsWasClickedDawg()
 comment3.params=
-comment3.target=void\ shaded()
+comment3.target=boolean\ isIconShaded()
 comment4.params=
-comment4.target=void\ notShaded()
-numComments=5
+comment4.target=void\ shaded()
+comment5.params=
+comment5.target=void\ notShaded()
+numComments=6
