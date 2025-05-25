@@ -48,6 +48,13 @@ public class GamePanel
         Upgrades(buttonPanel,cookieCount,CookieCount,buttonList);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
+        JPanel upgradesButtonPanel = new JPanel();
+        upgradesButtonPanel.setLayout(new BoxLayout(upgradesButtonPanel, BoxLayout.Y_AXIS));
+        upgradesButtonPanel.setBackground(Color.RED);
+        ArrayList<UpgradeButton> upgradesButtonList = new ArrayList<>();
+        actualUpgrades(upgradesButtonPanel,cookieCount,CookieCount,upgradesButtonList);
+        JScrollPane UpgradesScrollPane = new JScrollPane(upgradesButtonPanel);
+        UpgradesScrollPane.hide();
         
         JPanel selectorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         selectorPanel.setOpaque(false);
@@ -85,6 +92,7 @@ public class GamePanel
                         upgradesSelect.notShaded();
                         currentlyGrandma[0] = false;
                         scrollPane.hide();
+                        UpgradesScrollPane.show();
                     }
                 } else if (source == grandmasSelect) {
                     if(!currentlyGrandma[0]){
@@ -92,6 +100,7 @@ public class GamePanel
                         upgradesSelect.shaded();
                         currentlyGrandma[0] = true;
                         scrollPane.show();
+                        UpgradesScrollPane.hide();
                     }
                 }
             }
@@ -102,6 +111,7 @@ public class GamePanel
         
         selectorPanel.add(grandmasSelect);
         selectorPanel.add(upgradesSelect);
+        
         
         JButton cookie = new JButton(cookieIcon);
         cookie.setContentAreaFilled(false);
@@ -131,6 +141,7 @@ public class GamePanel
         
         selectorPanel.setBounds(465,145,340,53);
         cpsCount.setBounds(480,60,300,100);
+        UpgradesScrollPane.setBounds(473,205,310,357);
         scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(65,35,550,300);
         cookie.setBounds(80,250,300,300);
@@ -139,6 +150,7 @@ public class GamePanel
         
         contentPanel.add(selectorPanel);
         contentPanel.add(cpsCount);
+        contentPanel.add(UpgradesScrollPane);
         contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);
         contentPanel.add(cookie);
@@ -320,6 +332,58 @@ public class GamePanel
                             b.shaded();
                             }
                         }
+                    }
+                });
+            }
+            else{
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                    }
+                     for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                    }
+                });
+            }
+            buttonList.add(button);
+        }
+        for(JButton j : buttonList){
+            panel.add(j);
+        }
+        
+    }
+    public void actualUpgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
+        int[] i = {0};
+        for (i[0]=1; i[0] <= 8; i[0]++) {
+            ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
+            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
+            button.setContentAreaFilled(false);
+            button.setBorderPainted(false);
+            button.setFocusPainted(false);
+            Dimension size = new Dimension(292, 60);
+            button.setPreferredSize(size);
+            button.setMaximumSize(size);
+            button.setMinimumSize(size); //for some reason all three of these are needed
+            if(i[0]==9){
+                button.setPrice(15);
+                button.setNotShadedIcon(new ImageIcon(filePath+"AutoClicker.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"AutoClickerShaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"AutoClickerRollover.png"));
+                
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            cps++;
+                            for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                     }
                     }
                 });
             }
