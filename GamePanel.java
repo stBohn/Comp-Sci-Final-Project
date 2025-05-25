@@ -48,6 +48,22 @@ public class GamePanel
         Upgrades(buttonPanel,cookieCount,CookieCount,buttonList);
         JScrollPane scrollPane = new JScrollPane(buttonPanel);
         
+        
+        JPanel selectorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        selectorPanel.setOpaque(false);
+        buttonPanel.setBackground(Color.RED);
+        SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"));
+        Dimension size = new Dimension(163, 50);
+        grandmasSelect.setPreferredSize(size);
+        grandmasSelect.setMaximumSize(size);
+        grandmasSelect.setMinimumSize(size);
+        selectorPanel.add(grandmasSelect);
+        SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"));
+        upgradesSelect.setPreferredSize(size);
+        upgradesSelect.setMaximumSize(size);
+        upgradesSelect.setMinimumSize(size);
+        selectorPanel.add(upgradesSelect);
+        
         JButton cookie = new JButton(cookieIcon);
         cookie.setContentAreaFilled(false);
         cookie.setBorderPainted(false);
@@ -74,6 +90,7 @@ public class GamePanel
             buttonAnimation(cookie);
         });
         
+        selectorPanel.setBounds(465,145,340,53);
         cpsCount.setBounds(480,60,300,100);
         scrollPane.setBounds(473,205,310,357);
         CookieCount.setBounds(65,35,550,300);
@@ -81,6 +98,7 @@ public class GamePanel
         background.setBounds(0,0,800,600);
         MainGame.setBounds(0,0,800,600);
         
+        contentPanel.add(selectorPanel);
         contentPanel.add(cpsCount);
         contentPanel.add(scrollPane);
         contentPanel.add(CookieCount);

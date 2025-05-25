@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=SelectorButton
+comment1.params=shadedIcon\ notShadedIcon
+comment1.target=SelectorButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon)
+comment2.params=
+comment2.target=boolean\ isIconShaded()
+comment3.params=
+comment3.target=void\ shaded()
+comment4.params=
+comment4.target=void\ notShaded()
+numComments=5
