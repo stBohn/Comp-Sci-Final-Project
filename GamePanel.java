@@ -52,16 +52,44 @@ public class GamePanel
         JPanel selectorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         selectorPanel.setOpaque(false);
         buttonPanel.setBackground(Color.RED);
-        SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"), true);
+        SelectorButton grandmasSelect = new SelectorButton(new ImageIcon(filePath+"GrandmasSelectorShaded.png"), new ImageIcon(filePath+"GrandmasSelector.png"));
         Dimension size = new Dimension(163, 50);
         grandmasSelect.setPreferredSize(size);
         grandmasSelect.setMaximumSize(size);
         grandmasSelect.setMinimumSize(size);
-        selectorPanel.add(grandmasSelect);
-        SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"), false);
+        grandmasSelect.notShaded();
+        
+        SelectorButton upgradesSelect = new SelectorButton(new ImageIcon(filePath+"UpgradesSelectorShaded.png"), new ImageIcon(filePath+"UpgradesSelector.png"));
         upgradesSelect.setPreferredSize(size);
         upgradesSelect.setMaximumSize(size);
         upgradesSelect.setMinimumSize(size);
+        upgradesSelect.shaded();
+        
+        boolean[] currentlyGrandma = {true};
+        
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                if (source == upgradesSelect) {
+                    if(currentlyGrandma[0]){
+                        grandmasSelect.shaded();
+                        upgradesSelect.notShaded();
+                        currentlyGrandma[0] = false;
+                    }
+                } else if (source == grandmasSelect) {
+                    if(!currentlyGrandma[0]){
+                        grandmasSelect.notShaded();
+                        upgradesSelect.shaded();
+                        currentlyGrandma[0] = true;
+                    }
+                }
+            }
+        };
+        //^ freaky ahh way of handling this
+        grandmasSelect.addActionListener(listener);
+        upgradesSelect.addActionListener(listener);
+        
+        selectorPanel.add(grandmasSelect);
         selectorPanel.add(upgradesSelect);
         
         JButton cookie = new JButton(cookieIcon);
