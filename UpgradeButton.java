@@ -65,12 +65,17 @@ public class UpgradeButton extends JButton {
         //draw number purchased
         if(numPurchased>=0){
             if(isShaded){
-                g.setColor(new Color(15,15,15));
+                g.setColor(new Color(41,41,41));
             }else{
-                g.setColor(new Color(99,99,99));
+                g.setColor(new Color(255,255,255));
             }
-            g.setFont(new Font("Arial", Font.BOLD, 30));
-            g.drawString(""+(int)numPurchased, 250, 35);
+            if(numPurchased<100){
+                g.setFont(new Font("Goudy Stout", Font.BOLD, 40));
+                g.drawString(""+(int)numPurchased, 230, 45);
+            }else{
+                g.setFont(new Font("Goudy Stout", Font.BOLD, 30));
+                g.drawString(""+(int)numPurchased, 230, 40);
+            }
         }
     }
 }
