@@ -21,7 +21,7 @@ public class GamePanel
     int numAutoClickers = 0;
     int[] numGrans = {0,0,0,0,0,0,0};
     
-    int cookieTier = 4;
+    int cookieTier = 1;
     
     
     String filePath = "ImageAssets\\";
