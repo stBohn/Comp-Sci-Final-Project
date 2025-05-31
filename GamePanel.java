@@ -21,7 +21,7 @@ public class GamePanel
     int numAutoClickers = 0;
     int[] numGrans = {0,0,0,0,0,0,0};
     
-    int cookieTier = 1;
+    int cookieTier = 0;
     
     
     String filePath = "ImageAssets\\";
@@ -405,7 +405,7 @@ public class GamePanel
             button.setPreferredSize(size);
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
-            if(i[0]==1){
+            if(i[0]==1&&cookieTier<2){
                 button.setPrice(5);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier2.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier2Shaded.png"));
@@ -428,7 +428,7 @@ public class GamePanel
                     }
                 });
             }
-            else if(i[0]==2){
+            else if(i[0]==2&&cookieTier<3){
                 button.setPrice(5);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier3.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier3Shaded.png"));
@@ -451,7 +451,7 @@ public class GamePanel
                     }
                 });
             }
-            else if(i[0]==3){
+            else if(i[0]==3&&cookieTier<4){
                 button.setPrice(5);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier4.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier4Shaded.png"));
@@ -476,16 +476,6 @@ public class GamePanel
             }
             else{
                 button.shaded();
-                // button.addActionListener(e -> {
-                    // if(cookieCount[0]>=button.getPrice()){
-                            // cookieCount[0]-=button.getPrice();
-                    // }
-                     // for (UpgradeButton b : buttonList) {
-                        // if (button.getPrice()>=cookieCount[0]) {
-                            // b.shaded();
-                        // }
-                    // }
-                // });
             }
             buttonList.add(button);
         }
@@ -527,7 +517,7 @@ public class GamePanel
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
                     //do this once a second
-                    SaveGame.saveToFile("Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i");
+                    SaveGame.saveToFile("Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i"+cookieTier+"j");
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
@@ -593,6 +583,7 @@ public class GamePanel
         numGrans[4] = Integer.parseInt(data.substring(data.indexOf("f")+1,data.indexOf("g"))); 
         numGrans[5] = Integer.parseInt(data.substring(data.indexOf("g")+1,data.indexOf("h"))); 
         numGrans[6] = Integer.parseInt(data.substring(data.indexOf("h")+1,data.indexOf("i"))); 
+        cookieTier = Integer.parseInt(data.substring(data.indexOf("i")+1,data.indexOf("j")));
         
     }
 }
