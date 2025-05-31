@@ -21,13 +21,14 @@ public class GamePanel
     double cps = 0;
     
     int numAutoClickers = 0; //stored in save data after "a" before "b"
-    int numGran1s = 0;
-    int numGran2s = 0; 
-    int numGran3s = 0; 
-    int numGran4s = 0; 
-    int numGran5s = 0; 
-    int numGran6s = 0; 
-    int numGran7s = 0; 
+    int[] numGrans = {0,0,0,0,0,0,0};
+    // int numGran1s = 0;
+    // int numGran2s = 0; 
+    // int numGran3s = 0; 
+    // int numGran4s = 0; 
+    // int numGran5s = 0; 
+    // int numGran6s = 0; 
+    // int numGran7s = 0; 
     
     int cookieTier = 4; //stored in save data after everything else
     
@@ -228,6 +229,7 @@ public class GamePanel
                         cookieCount[0]-=button.getPrice();
                         button.purchase();
                         numAutoClickers++;
+                        button.setNumberPurchased(numAutoClickers);
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -247,7 +249,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran1s++;
+                            numGrans[0]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -267,7 +269,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran2s++;
+                            numGrans[1]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -287,7 +289,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran3s++;
+                            numGrans[2]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -307,7 +309,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran4s++;
+                            numGrans[3]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -327,7 +329,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran5s++;
+                            numGrans[4]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -347,7 +349,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran6s++;
+                            numGrans[5]++;
                              for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -367,7 +369,7 @@ public class GamePanel
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            numGran7s++;
+                            numGrans[6]++;
                              for (UpgradeButton b : buttonList) {
                             if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -480,8 +482,7 @@ public class GamePanel
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
                     //do this once a second
-                    
-                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGran1s+"c"+numGran2s+"d"+numGran3s+"e"+numGran4s+"f"+numGran5s+"g"+numGran6s+"h"+numGran7s+"i");
+                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i");
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
@@ -494,6 +495,14 @@ public class GamePanel
                 DecimalFormat df = new DecimalFormat("#.###");
                 cpsCount.setText("per second: "+df.format(cps));
                 saveTimer[0]+=50;
+                 for (int i = 0; i<buttonList.size();i++) {
+                    if (i==0) {
+                        buttonList.get(i).setNumberPurchased(numAutoClickers);
+                    }
+                    else{
+                        buttonList.get(i).setNumberPurchased(numGrans[i-1]);
+                    }
+                }
             }
         });
         
@@ -507,13 +516,13 @@ public class GamePanel
         System.out.println(data);
         //System.out.println(data.substring(data.indexOf('a')+1,data.indexOf('b')));
         numAutoClickers = Integer.parseInt(data.substring(data.indexOf("a")+1,data.indexOf("b"))); //stored in save data after "a" before "b"
-        numGran1s = Integer.parseInt(data.substring(data.indexOf("b")+1,data.indexOf("c")));
-        numGran2s = Integer.parseInt(data.substring(data.indexOf("c")+1,data.indexOf("d"))); 
-        numGran3s = Integer.parseInt(data.substring(data.indexOf("d")+1,data.indexOf("e"))); 
-        numGran4s = Integer.parseInt(data.substring(data.indexOf("e")+1,data.indexOf("f"))); 
-        numGran5s = Integer.parseInt(data.substring(data.indexOf("f")+1,data.indexOf("g"))); 
-        numGran6s = Integer.parseInt(data.substring(data.indexOf("g")+1,data.indexOf("h"))); 
-        numGran7s = Integer.parseInt(data.substring(data.indexOf("h")+1,data.indexOf("i"))); 
+        numGrans[0] = Integer.parseInt(data.substring(data.indexOf("b")+1,data.indexOf("c")));
+        numGrans[1] = Integer.parseInt(data.substring(data.indexOf("c")+1,data.indexOf("d"))); 
+        numGrans[2] = Integer.parseInt(data.substring(data.indexOf("d")+1,data.indexOf("e"))); 
+        numGrans[3] = Integer.parseInt(data.substring(data.indexOf("e")+1,data.indexOf("f"))); 
+        numGrans[4] = Integer.parseInt(data.substring(data.indexOf("f")+1,data.indexOf("g"))); 
+        numGrans[5] = Integer.parseInt(data.substring(data.indexOf("g")+1,data.indexOf("h"))); 
+        numGrans[6] = Integer.parseInt(data.substring(data.indexOf("h")+1,data.indexOf("i"))); 
         
     }
 }

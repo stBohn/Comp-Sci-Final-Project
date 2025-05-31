@@ -7,13 +7,14 @@ public class UpgradeButton extends JButton {
     ImageIcon notShadedIcon;
     boolean isShaded;
     double price;
-    int numberPurchased = 0;
+    int numPurchased;
     public UpgradeButton(ImageIcon shadedIcon, ImageIcon notShadedIcon, int price) {
         this.shadedIcon = shadedIcon;
         this.notShadedIcon = notShadedIcon;
         this.price = price;
         setIcon(shadedIcon);
         isShaded = true;
+        this.numPurchased = numPurchased;
     }
     public void setShadedIcon(ImageIcon shadedIcon){
         this.shadedIcon = shadedIcon;
@@ -41,11 +42,15 @@ public class UpgradeButton extends JButton {
         repaint();
     }
     public void purchase(){
-        numberPurchased++;
+        numPurchased++;
         price = (price*(1.15));
     }
+    public void setNumberPurchased(int numPurchased){
+        this.numPurchased = numPurchased;
+        repaint();
+    }
     public int getNumberPurchased(){
-        return numberPurchased;
+        return numPurchased;
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -57,5 +62,15 @@ public class UpgradeButton extends JButton {
         }
         g.setFont(new Font("Arial", Font.BOLD, 14));
         g.drawString(""+(int)price, 80, 45);
+        //draw number purchased
+        if(numPurchased>=0){
+            if(isShaded){
+                g.setColor(new Color(15,15,15));
+            }else{
+                g.setColor(new Color(99,99,99));
+            }
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.drawString(""+(int)numPurchased, 250, 35);
+        }
     }
 }
