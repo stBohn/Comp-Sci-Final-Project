@@ -7,11 +7,10 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
-
+import java.nio.file.*;
 public class GamePanel
 {
-    //feilds are either stored in save data or found through math using save data. ex: 10 autoclickers -> cps reflects how many autoclickers there are. (done in update)
-    double[] cookieCount = {0}; //stored in save data before "a"
+    double[] cookieCount = {0};
     
     int millions = 0;
     int billions = 0;
@@ -20,20 +19,12 @@ public class GamePanel
     
     double cps = 0;
     
-    int numAutoClickers = 0; //stored in save data after "a" before "b"
+    int numAutoClickers = 0;
     int[] numGrans = {0,0,0,0,0,0,0};
-    // int numGran1s = 0;
-    // int numGran2s = 0; 
-    // int numGran3s = 0; 
-    // int numGran4s = 0; 
-    // int numGran5s = 0; 
-    // int numGran6s = 0; 
-    // int numGran7s = 0; 
     
-    int cookieTier = 4; //stored in save data after everything else
+    int cookieTier = 4;
     
-    //# Todo: make menu prompting user on first run on what type of computer theyre on, or find it with code. change file locaiton accordingly
-    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\"; //subject to change depending on where the user saves the game
+    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\";
     String filePath = fileLocation+"ImageAssets\\";
     public GamePanel()
     {
