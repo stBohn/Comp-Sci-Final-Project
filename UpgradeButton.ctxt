@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=UpgradeButton
-comment1.params=shadedIcon\ notShadedIcon\ price
-comment1.target=UpgradeButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon,\ int)
+comment1.params=shadedIcon\ notShadedIcon\ price\ isSkinButton
+comment1.target=UpgradeButton(javax.swing.ImageIcon,\ javax.swing.ImageIcon,\ int,\ boolean)
 comment10.params=numPurchased
 comment10.target=void\ setNumberPurchased(int)
 comment11.params=

@@ -199,7 +199,7 @@ public class GamePanel
         int[] i = {0};
         for (i[0]=1; i[0] <= 8; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
-            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
+            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 0, false);
             button.setContentAreaFilled(false);
             button.setBorderPainted(false);
             button.setFocusPainted(false);
@@ -390,9 +390,9 @@ public class GamePanel
     }
     public void actualUpgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
-        for (i[0]=1; i[0] <= 6; i[0]++) {
+        for (i[0]=1; i[0] <= 9; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
-            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
+            UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UpgradeButtonShaded.png"), 0, true);
             button.setContentAreaFilled(false);
             button.setBorderPainted(false);
             button.setFocusPainted(false);
@@ -413,6 +413,8 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=2;
+                            buttonList.remove(0);
+                            button.hide();
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -434,6 +436,8 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=3;
+                            buttonList.remove(1);
+                            button.hide();
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -455,6 +459,8 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=4;
+                            buttonList.remove(2);
+                            button.hide();
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -464,16 +470,17 @@ public class GamePanel
                 });
             }
             else{
-                button.addActionListener(e -> {
-                    if(cookieCount[0]>=button.getPrice()){
-                            cookieCount[0]-=button.getPrice();
-                    }
-                     for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
-                            b.shaded();
-                        }
-                    }
-                });
+                button.shaded();
+                // button.addActionListener(e -> {
+                    // if(cookieCount[0]>=button.getPrice()){
+                            // cookieCount[0]-=button.getPrice();
+                    // }
+                     // for (UpgradeButton b : buttonList) {
+                        // if (button.getPrice()>=cookieCount[0]) {
+                            // b.shaded();
+                        // }
+                    // }
+                // });
             }
             buttonList.add(button);
         }

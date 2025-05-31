@@ -8,13 +8,15 @@ public class UpgradeButton extends JButton {
     boolean isShaded;
     double price;
     int numPurchased;
-    public UpgradeButton(ImageIcon shadedIcon, ImageIcon notShadedIcon, int price) {
+    boolean isSkinButton;
+    public UpgradeButton(ImageIcon shadedIcon, ImageIcon notShadedIcon, int price,boolean isSkinButton) {
         this.shadedIcon = shadedIcon;
         this.notShadedIcon = notShadedIcon;
         this.price = price;
         setIcon(shadedIcon);
         isShaded = true;
         this.numPurchased = numPurchased;
+        this.isSkinButton = isSkinButton;
     }
     public void setShadedIcon(ImageIcon shadedIcon){
         this.shadedIcon = shadedIcon;
@@ -55,15 +57,17 @@ public class UpgradeButton extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(isShaded){
-            g.setColor(Color.RED);
-        }else{
-            g.setColor(Color.GREEN);
+        if(price!=0){
+            if(isShaded){
+                g.setColor(Color.RED);
+            }else{
+                g.setColor(Color.GREEN);
+            }
+            g.setFont(new Font("Arial", Font.BOLD, 14));
+            g.drawString(""+(int)price, 80, 45);
         }
-        g.setFont(new Font("Arial", Font.BOLD, 14));
-        g.drawString(""+(int)price, 80, 45);
         //draw number purchased
-        if(numPurchased>=0){
+        if(numPurchased>=0&&price!=0&&!isSkinButton){
             if(isShaded){
                 g.setColor(new Color(41,41,41));
             }else{
