@@ -10,21 +10,35 @@ import java.text.DecimalFormat;
 
 public class GamePanel
 {
-    double[] cookieCount = {0};
+    //feilds are either stored in save data or found through math using save data. ex: 10 autoclickers -> cps reflects how many autoclickers there are. (done in update)
+    double[] cookieCount = {0}; //stored in save data before "a"
+    
     int millions = 0;
     int billions = 0;
     int trillions = 0;
     int quadrillions = 0;
+    
     double cps = 0;
-    int numAutoClickers = 0;
-    ArrayList granCount = new ArrayList();
     
-    int cookieTier = 4;
+    int numAutoClickers = 0; //stored in save data after "a" before "b"
+    int numGran1s = 0;
+    int numGran2s = 0; 
+    int numGran3s = 0; 
+    int numGran4s = 0; 
+    int numGran5s = 0; 
+    int numGran6s = 0; 
+    int numGran7s = 0; 
+    int numGran8s = 0; 
     
-    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\";
+    int cookieTier = 4; //stored in save data after everything else
+    
+    //# Todo: make menu prompting user on first run on what type of computer theyre on, or find it with code. change file locaiton accordingly
+    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\"; //subject to change depending on where the user saves the game
     String filePath = fileLocation+"ImageAssets\\";
     public GamePanel()
     {
+        getSaveData();
+        
         JFrame frame = new JFrame();
         frame.setTitle("Cookie Click Game");
         frame.setSize(800, 600);
@@ -32,11 +46,6 @@ public class GamePanel
         frame.setBackground(Color.PINK);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //# testing purposes only!!
-        for(int i = 0; i<=8;i++){
-            
-        }
         
         ImageIcon backgroundIcon = new ImageIcon(filePath+"Background.png");
         JLabel background = new JLabel(backgroundIcon);
@@ -192,26 +201,13 @@ public class GamePanel
         
         frame.add(contentPanel);
         
-        getSaveData(buttonList);
         frame.setVisible(true);
         gameLoop(CookieCount, buttonList, cpsCount);
     }
-    public void getSaveData(ArrayList<UpgradeButton> buttonList){
+    public void getSaveData(){
         String data = LoadGame.loadFromFile(fileLocation+"Save Data\\Save.txt");
         cookieCount[0] = Double.parseDouble(data.substring(0,data.indexOf("a")));
         
-        millions = 0;
-        billions = 0;
-        trillions = 0;
-        quadrillions = 0;
-        numAutoClickers = 0;
-        ArrayList granCount = new ArrayList();
-        
-        for(int i = 0; i<buttonList.size();i++){
-            buttonList.get(i);
-        }
-        
-        cps = 0;
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
@@ -225,7 +221,6 @@ public class GamePanel
             button.setPreferredSize(size);
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
-            granCount.add(0);
             if(i[0]==1){
                 button.setPrice(15);
                 button.setNotShadedIcon(new ImageIcon(filePath+"AutoClicker.png"));
@@ -239,8 +234,7 @@ public class GamePanel
                     cookieCount[0]-=button.getPrice();
                     button.purchase();
                     cps+=0.1;
-                    granCount.set(0, ((int)granCount.get(0))+1);
-                            
+                        
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -492,14 +486,9 @@ public class GamePanel
         timer[0] = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
-                    //do this once a second, cause highkey dont need to do allat 20 times a second.
-                    String grannisDawg = "";//fuckass variable name
-                    for(int i = 1; i<granCount.size();i++){
-                        //start at 1 because my dumbass made granCount(0) the autoclickers and highkey dont need to make it its own array yk.
-                        grannisDawg+= "gran "+i+": ";
-                        grannisDawg+= granCount.get(i);
-                    }
-                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+" autoclickers: "+granCount.get(0));
+                    //do this once a second
+                    
+                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+"a");
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
