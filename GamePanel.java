@@ -15,14 +15,16 @@ public class GamePanel
     int billions = 0;
     int trillions = 0;
     int quadrillions = 0;
-    int cachedAutoClicks = 0;
     double cps = 0;
+    int numAutoClickers = 0;
+    ArrayList granCount = new ArrayList();
+    
+    int cookieTier = 4;
+    
     String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\";
     String filePath = fileLocation+"ImageAssets\\";
     public GamePanel()
     {
-        String data = LoadGame.loadFromFile("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\Save Data\\Save.txt");
-        cookieCount[0] = Double.parseDouble(data);
         JFrame frame = new JFrame();
         frame.setTitle("Cookie Click Game");
         frame.setSize(800, 600);
@@ -30,6 +32,11 @@ public class GamePanel
         frame.setBackground(Color.PINK);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //# testing purposes only!!
+        for(int i = 0; i<=8;i++){
+            
+        }
         
         ImageIcon backgroundIcon = new ImageIcon(filePath+"Background.png");
         JLabel background = new JLabel(backgroundIcon);
@@ -119,13 +126,32 @@ public class GamePanel
         selectorPanel.add(grandmasSelect);
         selectorPanel.add(upgradesSelect);
         
-        
-        JButton cookie = new JButton(cookieIcon);
+        ArrayList<ImageIcon> cookieIcons = new ArrayList();
+        cookieIcons.add(new ImageIcon(filePath+"Cookie.png"));
+        cookieIcons.add(new ImageIcon(filePath+"CookieTier2.png"));
+        cookieIcons.add(new ImageIcon(filePath+"CookieTier3.png"));
+        cookieIcons.add(new ImageIcon(filePath+"FinalCookie.png"));
+        ArrayList<ImageIcon> rolloverIcons = new ArrayList();
+        rolloverIcons.add(new ImageIcon(filePath+"RollOverCookie.png"));
+        rolloverIcons.add(new ImageIcon(filePath+"CookieTier2Rollover.png"));
+        rolloverIcons.add(new ImageIcon(filePath+"CookieTier3Rollover.png"));
+        rolloverIcons.add(new ImageIcon(filePath+"FinalCookieRollover.png"));
+        CookieButton cookie = new CookieButton(cookieIcons,rolloverIcons);
+        if(cookieTier == 1){
+            cookie.tier1();
+        }
+        else if(cookieTier == 2){
+            cookie.tier2();
+        }
+        else if(cookieTier == 3){
+            cookie.tier3();
+        }
+        else if(cookieTier == 4){
+            cookie.tier4();
+        }
         cookie.setContentAreaFilled(false);
         cookie.setBorderPainted(false);
         cookie.setFocusPainted(false);
-        ImageIcon rollover = new ImageIcon(filePath+"RollOverCookie.png");
-        cookie.setRolloverIcon(rollover);
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
         //stuff for making the button animated when clicked
@@ -166,8 +192,26 @@ public class GamePanel
         
         frame.add(contentPanel);
         
+        getSaveData(buttonList);
         frame.setVisible(true);
         gameLoop(CookieCount, buttonList, cpsCount);
+    }
+    public void getSaveData(ArrayList<UpgradeButton> buttonList){
+        String data = LoadGame.loadFromFile(fileLocation+"Save Data\\Save.txt");
+        cookieCount[0] = Double.parseDouble(data.substring(0,data.indexOf("a")));
+        
+        millions = 0;
+        billions = 0;
+        trillions = 0;
+        quadrillions = 0;
+        numAutoClickers = 0;
+        ArrayList granCount = new ArrayList();
+        
+        for(int i = 0; i<buttonList.size();i++){
+            buttonList.get(i);
+        }
+        
+        cps = 0;
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
@@ -181,6 +225,7 @@ public class GamePanel
             button.setPreferredSize(size);
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
+            granCount.add(0);
             if(i[0]==1){
                 button.setPrice(15);
                 button.setNotShadedIcon(new ImageIcon(filePath+"AutoClicker.png"));
@@ -191,12 +236,11 @@ public class GamePanel
                 button.setForeground(Color.RED);
                 button.addActionListener(e -> {
                     if(cookieCount[0]>=button.getPrice()){
-                            cookieCount[0]-=button.getPrice();
-                            button.purchase();
-                            if(button.numberPurchased==1)
-                                cps+=0.1;
-                            else
-                                cps+=0.04;
+                    cookieCount[0]-=button.getPrice();
+                    button.purchase();
+                    cps+=0.1;
+                    granCount.set(0, ((int)granCount.get(0))+1);
+                            
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -416,7 +460,7 @@ public class GamePanel
         }
         
     }
-    public void buttonAnimation(JButton cookie){
+    public void buttonAnimation(CookieButton cookie){
         int[] i = {0};
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(10,new ActionListener() {
@@ -424,8 +468,18 @@ public class GamePanel
                 if(i[0]>=3){
                     timer[0].stop();
                 }
-                ImageIcon clickedIcon = new ImageIcon("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Cookie.png");
-                cookie.setIcon(clickedIcon);
+                        if(cookieTier == 1){
+                    cookie.tier1();
+                }
+                else if(cookieTier == 2){
+                    cookie.tier2();
+                }
+                else if(cookieTier == 3){
+                    cookie.tier3();
+                }
+                else if(cookieTier == 3){
+                    cookie.tier4();
+                }
                 i[0]++;
             }
         });
@@ -438,7 +492,14 @@ public class GamePanel
         timer[0] = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
-                    SaveGame.saveToFile("C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\Save Data\\Save.txt", ""+cookieCount[0]);
+                    //do this once a second, cause highkey dont need to do allat 20 times a second.
+                    String grannisDawg = "";//fuckass variable name
+                    for(int i = 1; i<granCount.size();i++){
+                        //start at 1 because my dumbass made granCount(0) the autoclickers and highkey dont need to make it its own array yk.
+                        grannisDawg+= "gran "+i+": ";
+                        grannisDawg+= granCount.get(i);
+                    }
+                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+" autoclickers: "+granCount.get(0));
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
