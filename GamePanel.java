@@ -7,7 +7,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
-import java.nio.file.*;
 public class GamePanel
 {
     double[] cookieCount = {0};
@@ -24,11 +23,12 @@ public class GamePanel
     
     int cookieTier = 4;
     
-    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\";
-    String filePath = fileLocation+"ImageAssets\\";
+    
+    String filePath = "ImageAssets\\";
     public GamePanel()
     {
         getSaveData();
+        String location = "";
         
         JFrame frame = new JFrame();
         frame.setTitle("Cookie Click Game");
@@ -473,7 +473,7 @@ public class GamePanel
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
                     //do this once a second
-                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i");
+                    SaveGame.saveToFile("Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i");
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
@@ -500,12 +500,10 @@ public class GamePanel
         timer[0].start();
     }
     public void getSaveData(){
-        String data = LoadGame.loadFromFile(fileLocation+"Save Data\\Save.txt");
+        String data = LoadGame.loadFromFile("Save Data\\Save.txt");
         
         cookieCount[0] = Double.parseDouble(data.substring(0,data.indexOf('a')));
         
-        System.out.println(data);
-        //System.out.println(data.substring(data.indexOf('a')+1,data.indexOf('b')));
         numAutoClickers = Integer.parseInt(data.substring(data.indexOf("a")+1,data.indexOf("b"))); //stored in save data after "a" before "b"
         numGrans[0] = Integer.parseInt(data.substring(data.indexOf("b")+1,data.indexOf("c")));
         numGrans[1] = Integer.parseInt(data.substring(data.indexOf("c")+1,data.indexOf("d"))); 

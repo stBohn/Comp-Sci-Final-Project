@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class MainMenu
 {
-    String fileLocation = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\"; //subject to change depending on where the user saves the game
-    String filePath = fileLocation+"ImageAssets\\";
+    String filePath = "ImageAssets\\";
     public MainMenu()
     {
         JFrame frame = new JFrame();
@@ -74,11 +73,11 @@ public class MainMenu
         helpButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
                 if(timesClicked[0]<=0){
-                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+0+"a"+0+"b"+0+"c"+0+"d"+0+"e"+0+"f"+0+"g"+0+"h"+0+"i");
+                    SaveGame.saveToFile("Save Data\\Save.txt", ""+0+"a"+0+"b"+0+"c"+0+"d"+0+"e"+0+"f"+0+"g"+0+"h"+0+"i");
                     timesClicked[0]++;
                 }
                 else{
-                    SaveGame.saveToFile(fileLocation+"Save Data\\Save.txt", ""+1000+"a"+0+"b"+1+"c"+10+"d"+100+"e"+1000+"f"+0+"g"+0+"h"+1+"i");
+                    SaveGame.saveToFile("Save Data\\Save.txt", ""+1000+"a"+0+"b"+1+"c"+10+"d"+100+"e"+1000+"f"+0+"g"+0+"h"+1+"i");
                     timesClicked[0]++;
                 }
             });
