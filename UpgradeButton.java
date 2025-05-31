@@ -37,6 +37,7 @@ public class UpgradeButton extends JButton {
     public void shaded(){
         setIcon(shadedIcon);
         isShaded = true;
+        repaint();
     }
     public void notShaded(){
         setIcon(notShadedIcon);

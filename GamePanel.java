@@ -168,6 +168,11 @@ public class GamePanel
                            b.notShaded();
                     }
             }
+             for (UpgradeButton b : upgradesButtonList) {
+                    if (b.getPrice()<=cookieCount[0]) {
+                           b.notShaded();
+                    }
+            }
             
             buttonAnimation(cookie);
         });
@@ -222,7 +227,7 @@ public class GamePanel
                         numAutoClickers++;
                         button.setNumberPurchased(numAutoClickers);
                             for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                      }
@@ -242,7 +247,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[0]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -262,7 +267,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[1]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -282,7 +287,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[2]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -302,7 +307,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[3]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -322,7 +327,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[4]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -342,7 +347,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[5]++;
                              for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                         }
@@ -362,7 +367,7 @@ public class GamePanel
                             button.purchase();
                             numGrans[6]++;
                              for (UpgradeButton b : buttonList) {
-                            if (button.getPrice()>=cookieCount[0]) {
+                            if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                             }
                         }
@@ -375,7 +380,7 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                     }
                      for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                     }
@@ -413,10 +418,10 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=2;
-                            buttonList.remove(0);
+                            buttonList.remove(button);
                             button.hide();
                             for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                      }
@@ -436,10 +441,10 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=3;
-                            buttonList.remove(1);
+                            buttonList.remove(button);
                             button.hide();
                             for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                      }
@@ -459,10 +464,10 @@ public class GamePanel
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
                             cookieTier=4;
-                            buttonList.remove(2);
+                            buttonList.remove(button);
                             button.hide();
                             for (UpgradeButton b : buttonList) {
-                        if (button.getPrice()>=cookieCount[0]) {
+                        if (b.getPrice()>=cookieCount[0]) {
                             b.shaded();
                         }
                      }
@@ -538,12 +543,12 @@ public class GamePanel
                     }
                 }
                 for (UpgradeButton b : buttonList) {
-                    if (b.getPrice()>=cookieCount[0]) {
+                    if (b.getPrice()>cookieCount[0]) {
                         b.shaded();
                     }
                 }
                 for (UpgradeButton b : upgradesButtonList) {
-                    if (b.getPrice()>=cookieCount[0]) {
+                    if (b.getPrice()>cookieCount[0]) {
                         b.shaded();
                     }
                 }
