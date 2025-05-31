@@ -193,7 +193,7 @@ public class GamePanel
         frame.add(contentPanel);
         
         frame.setVisible(true);
-        gameLoop(CookieCount, buttonList, upgradesButtonList, cpsCount);
+        gameLoop(CookieCount, cookie, buttonList, upgradesButtonList, cpsCount);
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
@@ -490,7 +490,7 @@ public class GamePanel
                 if(i[0]>=3){
                     timer[0].stop();
                 }
-                        if(cookieTier == 1){
+                if(cookieTier == 1){
                     cookie.tier1();
                 }
                 else if(cookieTier == 2){
@@ -499,7 +499,7 @@ public class GamePanel
                 else if(cookieTier == 3){
                     cookie.tier3();
                 }
-                else if(cookieTier == 3){
+                else if(cookieTier == 4){
                     cookie.tier4();
                 }
                 i[0]++;
@@ -507,7 +507,7 @@ public class GamePanel
         });
         timer[0].start();
     }
-    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList, ArrayList<UpgradeButton> upgradesButtonList, JLabel cpsCount){
+    public void gameLoop(JLabel CookieCount, CookieButton cookie, ArrayList<UpgradeButton> buttonList, ArrayList<UpgradeButton> upgradesButtonList, JLabel cpsCount){
         //20fps
         int[] saveTimer = {0};
         Timer[] timer = new Timer[1];
@@ -529,6 +529,28 @@ public class GamePanel
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
                     }
+                }
+                for (UpgradeButton b : buttonList) {
+                    if (b.getPrice()>=cookieCount[0]) {
+                        b.shaded();
+                    }
+                }
+                for (UpgradeButton b : upgradesButtonList) {
+                    if (b.getPrice()>=cookieCount[0]) {
+                        b.shaded();
+                    }
+                }
+                if(cookieTier == 1){
+                    cookie.tier1();
+                }
+                else if(cookieTier == 2){
+                    cookie.tier2();
+                }
+                else if(cookieTier == 3){
+                    cookie.tier3();
+                }
+                else if(cookieTier == 4){
+                    cookie.tier4();
                 }
                 DecimalFormat df = new DecimalFormat("#.###");
                 cpsCount.setText("per second: "+df.format(cps));
