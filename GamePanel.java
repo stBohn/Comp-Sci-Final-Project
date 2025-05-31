@@ -193,7 +193,7 @@ public class GamePanel
         frame.add(contentPanel);
         
         frame.setVisible(true);
-        gameLoop(CookieCount, buttonList, cpsCount);
+        gameLoop(CookieCount, buttonList, upgradesButtonList, cpsCount);
     }
     public void Upgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
@@ -390,7 +390,7 @@ public class GamePanel
     }
     public void actualUpgrades(JPanel panel,double[] cookieCount, JLabel CookieCount, ArrayList<UpgradeButton> buttonList){
         int[] i = {0};
-        for (i[0]=1; i[0] <= 8; i[0]++) {
+        for (i[0]=1; i[0] <= 6; i[0]++) {
             ImageIcon upgradeButtonIcon = new ImageIcon(filePath+"UpgradeButtonShaded.png");
             UpgradeButton button = new UpgradeButton(upgradeButtonIcon, new ImageIcon(filePath+"UgradeButton.png"), 16);
             button.setContentAreaFilled(false);
@@ -400,19 +400,61 @@ public class GamePanel
             button.setPreferredSize(size);
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
-            if(i[0]==9){
-                button.setPrice(15);
-                button.setNotShadedIcon(new ImageIcon(filePath+"AutoClicker.png"));
-                button.setShadedIcon(new ImageIcon(filePath+"AutoClickerShaded.png"));
+            if(i[0]==1){
+                button.setPrice(5);
+                button.setNotShadedIcon(new ImageIcon(filePath+"Tier2.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"Tier2Shaded.png"));
                 button.shaded();
-                button.setRolloverIcon(new ImageIcon(filePath+"AutoClickerRollover.png"));
+                button.setRolloverIcon(new ImageIcon(filePath+"Tier2Rollover.png"));
                 
                 button.setForeground(Color.RED);
                 button.addActionListener(e -> {
                     if(cookieCount[0]>=button.getPrice()){
                             cookieCount[0]-=button.getPrice();
                             button.purchase();
-                            cps++;
+                            cookieTier=2;
+                            for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                     }
+                    }
+                });
+            }
+            else if(i[0]==2){
+                button.setPrice(5);
+                button.setNotShadedIcon(new ImageIcon(filePath+"Tier3.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"Tier3Shaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"Tier3Rollover.png"));
+                
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            cookieTier=3;
+                            for (UpgradeButton b : buttonList) {
+                        if (button.getPrice()>=cookieCount[0]) {
+                            b.shaded();
+                        }
+                     }
+                    }
+                });
+            }
+            else if(i[0]==3){
+                button.setPrice(5);
+                button.setNotShadedIcon(new ImageIcon(filePath+"Tier4.png"));
+                button.setShadedIcon(new ImageIcon(filePath+"Tier4Shaded.png"));
+                button.shaded();
+                button.setRolloverIcon(new ImageIcon(filePath+"Tier4Rollover.png"));
+                
+                button.setForeground(Color.RED);
+                button.addActionListener(e -> {
+                    if(cookieCount[0]>=button.getPrice()){
+                            cookieCount[0]-=button.getPrice();
+                            button.purchase();
+                            cookieTier=4;
                             for (UpgradeButton b : buttonList) {
                         if (button.getPrice()>=cookieCount[0]) {
                             b.shaded();
@@ -465,7 +507,7 @@ public class GamePanel
         });
         timer[0].start();
     }
-    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList, JLabel cpsCount){
+    public void gameLoop(JLabel CookieCount, ArrayList<UpgradeButton> buttonList, ArrayList<UpgradeButton> upgradesButtonList, JLabel cpsCount){
         //20fps
         int[] saveTimer = {0};
         Timer[] timer = new Timer[1];
@@ -479,6 +521,11 @@ public class GamePanel
                 cookieCount[0]+=((double)cps/20);
                 CookieCount.setText("Cookies: "+String.format("%.1f", cookieCount[0])); 
                  for (UpgradeButton b : buttonList) {
+                    if (b.getPrice()<=cookieCount[0]) {
+                           b.notShaded();
+                    }
+                }
+                 for (UpgradeButton b : upgradesButtonList) {
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
                     }

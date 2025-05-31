@@ -94,28 +94,5 @@ public class MainMenu
         frame.setVisible(true);
         frame.setAlwaysOnTop(false);
         
-        //spinCookieAnimation(cookieLabel);
     }
-    //# scrapped idea to make cookie spin. Had to make a custom photoshop script to export all 360 rotated pngs, just for me to realize its lame and i dont like it :(
-    // public void spinCookieAnimation(JLabel cookieLabel) {
-        // int[] i = {0};
-        // Timer[] timer = new Timer[1];
-    
-        // timer[0] = new Timer(10, new ActionListener() {
-            // public void actionPerformed(ActionEvent e) {
-                // if (i[0] >= 360) {
-                    // i[0]=0;
-                // }
-                
-                // String frameNumber = String.format("%03d", i[0]);
-                // String path = "C:\\Users\\Steve\\Documents\\GitHub\\Comp-Sci-Final-Project\\ImageAssets\\Main Menu Animations\\Cookie Spin\\frame_" + frameNumber + ".png";
-                // cookieLabel.setIcon(new ImageIcon(path));
-    
-                // i[0]++;
-            // }
-        // });
-    
-        // timer[0].start();
-    // }
-
 }
