@@ -23,6 +23,9 @@ public class MainMenu
         ImageIcon backgroundIcon = new ImageIcon(filePath+"Background.png");
         JLabel background = new JLabel(backgroundIcon);
         
+        ImageIcon namecardIcon = new ImageIcon(filePath+"Namecard.png");
+        JLabel nameCard = new JLabel(namecardIcon);
+        
         ImageIcon cookieIcon = new ImageIcon(filePath+"Cookie.png");
         JLabel cookieLabel = new JLabel(cookieIcon);
         
@@ -36,12 +39,13 @@ public class MainMenu
         ImageIcon helpIconRollOver = new ImageIcon(filePath+"HelpRollOver.png");
         
         
+        
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
         contentPanel.setBackground(Color.PINK);
         
         
-        
+        nameCard.setBounds(0,475,600,80);
         background.setBounds(0,0,800,600);
         cookieLabel.setBounds(75,200,300,300);
         title.setBounds(200,30,553,256);
@@ -80,6 +84,7 @@ public class MainMenu
         helpButton.setFocusPainted(false);
         contentPanel.add(helpButton);
         
+        contentPanel.add(nameCard);
         contentPanel.add(title);
         contentPanel.add(cookieLabel);
         contentPanel.add(background);
