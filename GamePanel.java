@@ -46,13 +46,13 @@ public class GamePanel
         
         ImageIcon cookieIcon = new ImageIcon(filePath+"Cookie.png");
         
-        JLabel CookieCount = new JLabel("Cookies: "+String.format("%.1f", cookieCount[0]));
-        CookieCount.setFont(new Font("Arial", Font.PLAIN, 40));
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        JLabel CookieCount = new JLabel("Cookies: "+df.format(cookieCount[0]));
+        CookieCount.setFont(new Font("Arial", Font.PLAIN, 30));
         CookieCount.setForeground(Color.WHITE);
-        DecimalFormat df = new DecimalFormat("#.###");
         JLabel cpsCount = new JLabel();
         cpsCount.setText("per second: "+df.format(cps));
-        cpsCount.setFont(new Font("Arial", Font.PLAIN, 30));
+        cpsCount.setFont(new Font("Arial", Font.PLAIN, 20));
         cpsCount.setForeground(Color.WHITE);
         
         JPanel buttonPanel = new JPanel();
@@ -161,8 +161,14 @@ public class GamePanel
         int animationSteps = 5;
         int delay = 20; //in miliseconds
         cookie.addActionListener(e -> {
-            cookieCount[0]+= (1);
-            
+            if(cookieTier==1)
+                cookieCount[0]+= (1);
+            if(cookieTier==2)
+                cookieCount[0]+= (100);
+            if(cookieTier==3)
+                cookieCount[0]+= (1000);
+            if(cookieTier==4)
+                cookieCount[0]+= (10000);
              for (UpgradeButton b : buttonList) {
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
@@ -275,7 +281,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==4){
-                button.setPrice(12000);
+                button.setPrice(10000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"StrongGran.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"StrongGranShaded.png"));
                 button.shaded();
@@ -295,7 +301,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==5){
-                button.setPrice(50000);
+                button.setPrice(1000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"SpookedGran.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"SpookedGranShaded.png"));
                 button.shaded();
@@ -315,7 +321,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==6){
-                button.setPrice(100000);
+                button.setPrice(10000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"JumpscareGran.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"JumpscareGranShaded.png"));
                 button.shaded();
@@ -335,7 +341,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==7){
-                button.setPrice(130000);
+                button.setPrice(100000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"GrandpaGran.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"GrandpaGranShaded.png"));
                 button.shaded();
@@ -355,7 +361,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==8){
-                button.setPrice(1000000);
+                button.setPrice(1000000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"PartyGran.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"PartyGranShaded.png"));
                 button.shaded();
@@ -406,7 +412,7 @@ public class GamePanel
             button.setMaximumSize(size);
             button.setMinimumSize(size); //for some reason all three of these are needed
             if(i[0]==1&&cookieTier<2){
-                button.setPrice(5);
+                button.setPrice(250000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier2.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier2Shaded.png"));
                 button.shaded();
@@ -429,7 +435,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==2&&cookieTier<3){
-                button.setPrice(5);
+                button.setPrice(1000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier3.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier3Shaded.png"));
                 button.shaded();
@@ -452,7 +458,7 @@ public class GamePanel
                 });
             }
             else if(i[0]==3&&cookieTier<4){
-                button.setPrice(5);
+                button.setPrice(10000000);
                 button.setNotShadedIcon(new ImageIcon(filePath+"Tier4.png"));
                 button.setShadedIcon(new ImageIcon(filePath+"Tier4Shaded.png"));
                 button.shaded();
@@ -521,7 +527,8 @@ public class GamePanel
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
-                CookieCount.setText("Cookies: "+String.format("%.1f", cookieCount[0])); 
+                DecimalFormat df = new DecimalFormat("#,###.00");
+                CookieCount.setText("Cookies: "+df.format(cookieCount[0])); 
                  for (UpgradeButton b : buttonList) {
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
@@ -554,7 +561,6 @@ public class GamePanel
                 else if(cookieTier == 4){
                     cookie.tier4();
                 }
-                DecimalFormat df = new DecimalFormat("#.###");
                 cpsCount.setText("per second: "+df.format(cps));
                 saveTimer[0]+=50;
                  for (int i = 0; i<buttonList.size();i++) {
@@ -565,7 +571,7 @@ public class GamePanel
                         buttonList.get(i).setNumberPurchased(numGrans[i-1]);
                     }
                 }
-                cps=(numAutoClickers*0.5)+(numGrans[0]*10)+(numGrans[1]*100)+(numGrans[2]*1000)+(numGrans[3]*10000)+(numGrans[4]*50000)+(numGrans[5]*100000)+(numGrans[6]*500000);
+                cps=((numAutoClickers*0.5)+(numGrans[0]*10)+(numGrans[1]*100)+(numGrans[2]*1000)+(numGrans[3]*10000)+(numGrans[4]*100000)+(numGrans[5]*1000000)+(numGrans[6]*10000000))*(cookieTier);
                 
             }
         });

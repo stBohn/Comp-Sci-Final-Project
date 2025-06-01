@@ -65,7 +65,7 @@ public class UpgradeButton extends JButton {
                 g.setColor(Color.GREEN);
             }
             g.setFont(new Font("Arial", Font.BOLD, 14));
-            g.drawString(""+(int)price, 80, 45);
+            g.drawString(String.format("%,d", ((int)price)),80,45);
         }
         //draw number purchased
         if(numPurchased>=0&&price!=0&&!isSkinButton){
