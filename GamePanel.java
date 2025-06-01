@@ -119,7 +119,6 @@ public class GamePanel
                 }
             }
         };
-        //^ freaky ahh way of handling this
         grandmasSelect.addActionListener(listener);
         upgradesSelect.addActionListener(listener);
         
@@ -160,15 +159,45 @@ public class GamePanel
         int scaleAmount = 20;
         int animationSteps = 5;
         int delay = 20; //in miliseconds
+        JLabel label = new JLabel();
+        label.setSize(150,50);
+        contentPanel.add(label);
+        label.setFont(new Font("Arial", Font.PLAIN, 30));
+        label.setForeground(Color.GREEN);
+        label.setVisible(false);
         cookie.addActionListener(e -> {
-            if(cookieTier==1)
-                cookieCount[0]+= (1);
-            if(cookieTier==2)
+            Point mouseScreen = MouseInfo.getPointerInfo().getLocation();
+            Point frameLocation = frame.getLocationOnScreen();
+            int x = mouseScreen.x - frameLocation.x;
+            int y = (mouseScreen.y - frameLocation.y)-50;
+            label.setText("+10");
+            label.setLocation(x, y);
+            label.setVisible(true);
+            
+            if(cookieTier==1){
+                cookieCount[0]+= (1); 
+                label.setText("+1");
+                label.setLocation(x, y);
+                label.setVisible(true);
+            }
+            if(cookieTier==2){
                 cookieCount[0]+= (100);
-            if(cookieTier==3)
+                label.setText("+100");
+                label.setLocation(x, y);
+                label.setVisible(true);
+            }
+            if(cookieTier==3){
                 cookieCount[0]+= (1000);
-            if(cookieTier==4)
+                label.setText("+1000");
+                label.setLocation(x, y);
+                label.setVisible(true);
+            }
+            if(cookieTier==4){
                 cookieCount[0]+= (10000);
+                label.setText("+10000");
+                label.setLocation(x, y);
+                label.setVisible(true);
+            }
              for (UpgradeButton b : buttonList) {
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
@@ -180,7 +209,7 @@ public class GamePanel
                     }
             }
             
-            buttonAnimation(cookie);
+            buttonAnimation(cookie, label);
         });
         
         selectorPanel.setBounds(465,145,340,53);
@@ -490,13 +519,14 @@ public class GamePanel
         }
         
     }
-    public void buttonAnimation(CookieButton cookie){
+    public void buttonAnimation(CookieButton cookie, JLabel label){
         int[] i = {0};
         Timer[] timer = new Timer[1];
-        timer[0] = new Timer(10,new ActionListener() {
+        timer[0] = new Timer(1,new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(i[0]>=3){
+                if(i[0]>=10){
                     timer[0].stop();
+                    label.setVisible(false);
                 }
                 if(cookieTier == 1){
                     cookie.tier1();
