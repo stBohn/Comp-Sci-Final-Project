@@ -98,8 +98,8 @@ public class HelpMenu
                 frame.dispose();
             });
         });
-        howToPlayButton.setFocusPainted(false);
-        contentPanel.add(howToPlayButton);
+        backButton.setFocusPainted(false);
+        contentPanel.add(backButton);
         
         contentPanel.add(title);
         contentPanel.add(backButton);
