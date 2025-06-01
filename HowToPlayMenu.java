@@ -6,10 +6,10 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 
 
-public class HelpMenu
+public class HowToPlayMenu
 {
     String filePath = "ImageAssets\\";
-    public HelpMenu()
+    public HowToPlayMenu()
     {
         JFrame frame = new JFrame();
         frame.setTitle("Main Menu");
@@ -57,7 +57,7 @@ public class HelpMenu
         howToPlayButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
                 
-                new HowToPlayMenu();
+                new GamePanel();
                 frame.dispose();
             });
         });
