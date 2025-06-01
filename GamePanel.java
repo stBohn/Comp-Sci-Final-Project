@@ -565,6 +565,8 @@ public class GamePanel
                         buttonList.get(i).setNumberPurchased(numGrans[i-1]);
                     }
                 }
+                cps=(numAutoClickers*0.5)+(numGrans[0]*10)+(numGrans[1]*100)+(numGrans[2]*1000)+(numGrans[3]*10000)+(numGrans[4]*50000)+(numGrans[5]*100000)+(numGrans[6]*500000);
+                
             }
         });
         
