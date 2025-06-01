@@ -159,17 +159,17 @@ public class GamePanel
         int scaleAmount = 20;
         int animationSteps = 5;
         int delay = 20; //in miliseconds
-        JLabel label = new JLabel();
-        label.setSize(150,50);
-        contentPanel.add(label);
-        label.setFont(new Font("Arial", Font.PLAIN, 30));
-        label.setForeground(Color.GREEN);
-        label.setVisible(false);
+        
         cookie.addActionListener(e -> {
+            JLabel label = new JLabel();
+            label.setSize(150,50);
+            label.setFont(new Font("Arial", Font.PLAIN, 30));
+            label.setVisible(false);
             Point mouseScreen = MouseInfo.getPointerInfo().getLocation();
             Point frameLocation = frame.getLocationOnScreen();
             int x = mouseScreen.x - frameLocation.x;
             int y = (mouseScreen.y - frameLocation.y)-50;
+            label.setForeground(Color.GREEN);
             label.setText("+10");
             label.setLocation(x, y);
             label.setVisible(true);
@@ -524,7 +524,7 @@ public class GamePanel
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(1,new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(i[0]>=10){
+                if(i[0]>=50){
                     timer[0].stop();
                     label.setVisible(false);
                 }
@@ -540,6 +540,7 @@ public class GamePanel
                 else if(cookieTier == 4){
                     cookie.tier4();
                 }
+                label.setForeground(new Color(0,255,0,(255-(i[0]*5))));
                 i[0]++;
             }
         });
