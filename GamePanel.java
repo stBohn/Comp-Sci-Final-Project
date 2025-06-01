@@ -161,18 +161,19 @@ public class GamePanel
         int delay = 20; //in miliseconds
         
         cookie.addActionListener(e -> {
-            JLabel label = new JLabel();
-            label.setSize(150,50);
-            label.setFont(new Font("Arial", Font.PLAIN, 30));
-            label.setVisible(false);
             Point mouseScreen = MouseInfo.getPointerInfo().getLocation();
             Point frameLocation = frame.getLocationOnScreen();
             int x = mouseScreen.x - frameLocation.x;
             int y = (mouseScreen.y - frameLocation.y)-50;
+            JLabel label = new JLabel();
+            label.setSize(150,50);
+            label.setFont(new Font("Arial", Font.PLAIN, 30));
             label.setForeground(Color.GREEN);
             label.setText("+10");
             label.setLocation(x, y);
             label.setVisible(true);
+            contentPanel.add(label);
+            contentPanel.setComponentZOrder(label, 0);
             
             if(cookieTier==1){
                 cookieCount[0]+= (1); 
@@ -519,12 +520,13 @@ public class GamePanel
         }
         
     }
+    
     public void buttonAnimation(CookieButton cookie, JLabel label){
         int[] i = {0};
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(1,new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(i[0]>=50){
+                if(i[0]>=51){
                     timer[0].stop();
                     label.setVisible(false);
                 }
@@ -560,6 +562,7 @@ public class GamePanel
                 cookieCount[0]+=((double)cps/20);
                 DecimalFormat df = new DecimalFormat("#,###.00");
                 CookieCount.setText("Cookies: "+df.format(cookieCount[0])); 
+                
                  for (UpgradeButton b : buttonList) {
                     if (b.getPrice()<=cookieCount[0]) {
                            b.notShaded();
