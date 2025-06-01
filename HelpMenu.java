@@ -35,6 +35,8 @@ public class HelpMenu
         ImageIcon debugIcon = new ImageIcon(filePath+"Debug.png");
         ImageIcon debugIconRollOver = new ImageIcon(filePath+"DebugRollOver.png");
         
+        ImageIcon backIcon = new ImageIcon(filePath+"BACK.png");
+        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollOver.png");
         
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);
@@ -84,7 +86,23 @@ public class HelpMenu
         debugButton.setFocusPainted(false);
         contentPanel.add(debugButton);
         
+        JButton backButton = new JButton(backIcon);
+        backButton.setRolloverIcon(backIconRollOver);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setFocusPainted(false);
+        backButton.setBounds(18,425,205,78);
+        backButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                new MainMenu();
+                frame.dispose();
+            });
+        });
+        howToPlayButton.setFocusPainted(false);
+        contentPanel.add(howToPlayButton);
+        
         contentPanel.add(title);
+        contentPanel.add(backButton);
         contentPanel.add(cookieLabel);
         contentPanel.add(background);
         
