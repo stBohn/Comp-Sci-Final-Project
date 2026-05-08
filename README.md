@@ -1,6 +1,12 @@
 Cookie Clicker Game  
 By Steven Bohn  
 Screenshots from in game:
+![Alt Text](Screenshots/1.png)
+![Alt Text](Screenshots/2.png)
+![Alt Text](Screenshots/3.png)
+![Alt Text](Screenshots/4.png)
+![Alt Text](Screenshots/5.png)
+![Alt Text](Screenshots/6.png)
 
 An idle clicker made in Java. The goal is to get as many cookies as you can, click the cookie, buy upgrades, and get more cookies.
 
