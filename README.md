@@ -1,6 +1,7 @@
 Cookie Clicker Game  
 By Steven Bohn  
 Screenshots from in game:
+
 ![Alt Text](Screenshots/1.png)
 ![Alt Text](Screenshots/2.png)
 ![Alt Text](Screenshots/3.png)
