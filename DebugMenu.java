@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class DebugMenu
 {
-    String filePath = "ImageAssets\\";
+    String filePath = "ImageAssets"+File.separator;
     public DebugMenu()
     {
         JFrame frame = new JFrame();
@@ -33,11 +33,11 @@ public class DebugMenu
         cookie.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
                 if(timesClicked[0]<=0){
-                    SaveGame.saveToFile("Save Data\\Save.txt", ""+0+"a"+0+"b"+0+"c"+0+"d"+0+"e"+0+"f"+0+"g"+0+"h"+0+"i"+1+"j");
+                    SaveGame.saveToFile("Save Data"+File.separator+"Save.txt", ""+0+"a"+0+"b"+0+"c"+0+"d"+0+"e"+0+"f"+0+"g"+0+"h"+0+"i"+1+"j");
                     timesClicked[0]++;
                 }
                 else{
-                    SaveGame.saveToFile("Save Data\\Save.txt", ""+1000+"a"+0+"b"+1+"c"+10+"d"+100+"e"+1000+"f"+0+"g"+0+"h"+1+"i"+4+"j");
+                    SaveGame.saveToFile("Save Data"+File.separator+"Save.txt", ""+1000+"a"+0+"b"+1+"c"+10+"d"+100+"e"+1000+"f"+0+"g"+0+"h"+1+"i"+4+"j");
                     timesClicked[0]++;
                 }
             });
@@ -45,7 +45,7 @@ public class DebugMenu
         cookie.setFocusPainted(false);
         
         ImageIcon backIcon = new ImageIcon(filePath+"BACK.png");
-        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollOver.png");
+        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollover.png");
         
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);

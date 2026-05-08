@@ -4,11 +4,11 @@ import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
-
-
 public class MainMenu
 {
-    String filePath = "ImageAssets\\";
+    String filePath = "ImageAssets"+File.separator;
+
+
     public MainMenu()
     {
         JFrame frame = new JFrame();

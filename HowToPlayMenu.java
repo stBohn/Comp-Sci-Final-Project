@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class HowToPlayMenu
 {
-    String filePath = "ImageAssets\\";
+    String filePath = "ImageAssets"+File.separator;
     public HowToPlayMenu()
     {
         JFrame frame = new JFrame();
@@ -25,7 +25,7 @@ public class HowToPlayMenu
         
         
         ImageIcon backIcon = new ImageIcon(filePath+"BACK.png");
-        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollOver.png");
+        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollover.png");
         
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class HelpMenu
 {
-    String filePath = "ImageAssets\\";
+    String filePath = "ImageAssets"+File.separator;
     public HelpMenu()
     {
         JFrame frame = new JFrame();
@@ -33,10 +33,10 @@ public class HelpMenu
         ImageIcon howToPlayButtonRollOver = new ImageIcon(filePath+"HowToPlayRollover.png");
         
         ImageIcon debugIcon = new ImageIcon(filePath+"Debug.png");
-        ImageIcon debugIconRollOver = new ImageIcon(filePath+"DebugRollOver.png");
+        ImageIcon debugIconRollOver = new ImageIcon(filePath+"DebugRollover.png");
         
         ImageIcon backIcon = new ImageIcon(filePath+"BACK.png");
-        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollOver.png");
+        ImageIcon backIconRollOver = new ImageIcon(filePath+"BACKRollover.png");
         
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(null);

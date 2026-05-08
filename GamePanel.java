@@ -1,5 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -24,11 +22,11 @@ public class GamePanel
     int cookieTier = 0;
     
     
-    String filePath = "ImageAssets\\";
+    String filePath = "ImageAssets"+File.separator;
     public GamePanel()
     {
         getSaveData();
-        String location = "";
+        String location = "Save Data"+File.separator+"Save.txt";
         
         JFrame frame = new JFrame();
         frame.setTitle("Cookie Click Game");
@@ -556,7 +554,7 @@ public class GamePanel
             public void actionPerformed(ActionEvent e) {
                 if(saveTimer[0]>=1000){
                     //do this once a second
-                    SaveGame.saveToFile("Save Data\\Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i"+cookieTier+"j");
+                    SaveGame.saveToFile("Save Data"+File.separator+"Save.txt", ""+cookieCount[0]+"a"+numAutoClickers+"b"+numGrans[0]+"c"+numGrans[1]+"d"+numGrans[2]+"e"+numGrans[3]+"f"+numGrans[4]+"g"+numGrans[5]+"h"+numGrans[6]+"i"+cookieTier+"j");
                     saveTimer[0]=0;
                 }
                 cookieCount[0]+=((double)cps/20);
@@ -613,7 +611,7 @@ public class GamePanel
         timer[0].start();
     }
     public void getSaveData(){
-        String data = LoadGame.loadFromFile("Save Data\\Save.txt");
+        String data = LoadGame.loadFromFile("Save Data"+File.separator+"Save.txt");
         
         cookieCount[0] = Double.parseDouble(data.substring(0,data.indexOf('a')));
         
